@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Dream Avenue', sans-serif;
   background-color: #F5F1ED; /* bézs szín */
   color: #333;
 }
@@ -279,10 +279,11 @@ footer .email {
   color: #333;
   display: block;
   transition: 0.2s;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .side-nav a:hover {
-  background-color: #f2f2f2;
+  background-color: #F5F1ED;
 }
 
 .side-nav .close-btn {
@@ -394,7 +395,7 @@ footer .email {
 
 /* A középen lévő halvány doboz */
 .hero-content {
-  background-color: rgba(250, 236, 212, 0.6);
+  background-color: rgba(245, 241, 237, 0.85);
   padding: 1rem 2rem;       /* csökkentett belső térköz */
   border-radius: 10px;
   max-width: 500px;
@@ -493,7 +494,7 @@ footer .email {
 
 /* Görgetéskor elhalványított változat */
 .top-bar.scrolled {
-  background-color: rgba(250, 236, 212, 0.85); /* halványabb háttér */
+  background-color: rgba(245, 241, 237, 0.85); /* halványabb háttér */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);   /* kis árnyék, elegáns elválasztás */
 }
 
