@@ -180,35 +180,50 @@ From selecting the perfect color palette to choosing bespoke furniture and acces
   </div>
 </section>
 
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <div class="section-inner">
-      <h2>Contact Us</h2>
-      <form>
-        <div class="form-row">
-          <div class="form-group">
-            <label>First Name <span>*</span></label>
-            <input type="text" required />
-          </div>
-          <div class="form-group">
-            <label>Last Name <span>*</span></label>
-            <input type="text" required />
-          </div>
+<!-- CONTACT FORM -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <h2>Contact Us</h2>
+    <form id="contact-form" action="https://formsubmit.co/2005vrgkng@gmail.com" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name <span>*</span></label>
+          <input type="text" name="first_name" required />
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Email <span>*</span></label>
-            <input type="email" required />
-          </div>
-          <div class="form-group">
-            <label>Company Name</label>
-            <input type="text" />
-          </div>
+        <div class="form-group">
+          <label>Last Name <span>*</span></label>
+          <input type="text" name="last_name" required />
         </div>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  </section>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email <span>*</span></label>
+          <input type="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label>Company Name</label>
+          <input type="text" name="company" />
+        </div>
+      </div>
+
+      <!-- rejtett mezők -->
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="about:blank">
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</section>
+
+<!-- FELUGRÓ ABLAK -->
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <p>Thank you for getting in touch!<br>
+    We appreciate you contacting us and will respond shortly.</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
 
   <!-- FOOTER -->
   <footer>
@@ -264,6 +279,37 @@ From selecting the perfect color palette to choosing bespoke furniture and acces
       topBar.classList.remove("scrolled");
     }
   });
+</script>
+<script>
+  const form = document.getElementById("contact-form");
+  const popup = document.getElementById("popup");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault(); // megakadályozza az automatikus átirányítást
+
+    // ellenőrizzük, hogy minden required mező ki van-e töltve
+    if (form.checkValidity()) {
+      // elküldjük az űrlapot
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+      })
+      .then(() => {
+        popup.style.display = "flex"; // megjeleníti a popupot
+        form.reset(); // üríti az űrlapot
+      })
+      .catch((error) => {
+        alert("Hiba történt az elküldés során.");
+        console.error(error);
+      });
+    } else {
+      form.reportValidity(); // mutassa hol van hiba
+    }
+  });
+
+  function closePopup() {
+    popup.style.display = "none";
+  }
 </script>
 
 </body>

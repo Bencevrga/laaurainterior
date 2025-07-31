@@ -451,7 +451,7 @@ footer .email {
 }
 
 .about-image img {
-  max-width: 250px;
+  max-width: 350px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
@@ -516,4 +516,42 @@ footer .email {
 .site-name {
   font-size: 1.3rem;
   color: #000;
+}
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(245, 241, 237, 0.85); /* halvány bézs háttér */
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.popup-content {
+  background: #fff;
+  padding: 2rem 3rem;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.popup-content button {
+  padding: 0.5rem 1.5rem;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.popup-content button:hover {
+  background-color: #333;
 }
