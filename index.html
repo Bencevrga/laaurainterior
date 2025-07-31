@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Aura Interiors</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</head>
+<body>
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <!-- Bal szélen a logó -->
+    <img src="img/logo.jpg" alt="La Aura Interiors Logo" class="header-logo">
+    
+    <!-- Mellette az oldalnév -->
+    <div class="site-name">La Aura Interiors</div>
+  </div>
+</header>
+<!-- Hero kép -->
+<section class="hero">
+  <div class="hero-content">
+    <img src="img/logo.jpg" alt="La Aura Interiors Logo" class="hero-logo">
+    <h1>Welcome to La Aura Interiors</h1>
+    <p>Elevate your space. Reflect your style.</p>
+  </div>
+</section>
+  <!-- Oldalsó menü -->
+  <div class="side-nav" id="sideNav">
+    <a href="#" class="close-btn" onclick="toggleMenu()">×</a>
+    <a href="#home" onclick="toggleMenu()">Home</a>
+    <a href="#about" onclick="toggleMenu()">About</a>
+    <a href="#portfolio" onclick="toggleMenu()">Portfolio</a>
+    <a href="#contact" onclick="toggleMenu()">Contact Us</a>
+  </div>
+  <span class="menu-icon" onclick="toggleMenu()">☰</span>
+
+  <section class="about-section">
+  <div class="about-container">
+    <!-- Bal oldalt: szöveg -->
+    <div class="about-text">
+      <h2>About Me</h2>
+      <p>
+        I’m Lara Bencová, the founder of La Aura Interiors.  
+        My passion is to craft personalized interiors that reflect each client’s unique style and personality.  
+        From concept to completion, I focus on creating functional yet timeless designs that bring harmony and comfort to your home.
+      </p>
+      <p>
+        Whether you are refreshing a single room or transforming an entire home, I’ll guide you through every step with care and creativity.
+      </p>
+    </div>
+
+    <!-- Jobb oldalt: kép -->
+    <div class="about-image">
+      <img src="img/about.jpg" alt="About La Aura Interiors">
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="section-inner">
+      <h2>About</h2>
+      <p class="subtitle">Crafting Personalized Interior Designs</p>
+      <p>
+       Welcome to La Aura Interiors – where thoughtful design meets personal expression.
+Whether you're starting fresh or looking to transform your existing space, I help you create interiors that feel truly yours.
+
+Every project begins with understanding your lifestyle, needs, and vision, so the end result not only looks beautiful but also feels comfortable and functional. I believe that a well-designed space has the power to inspire, improve well-being, and reflect your unique story.
+
+From selecting the perfect color palette to choosing bespoke furniture and accessories, I guide you through every step of the process with care and attention to detail. My goal is to create timeless, harmonious interiors that elevate your daily life and bring joy to every moment spent at home.
+
+
+      </p>
+    </div>
+  </section>
+<div class="section-divider"></div>
+  <!-- SERVICES -->
+  <section class="services" id="services">
+  <div class="section-inner">
+    <h2>Our Services</h2>
+
+    <!-- 1. Service -->
+    <div class="service-item">
+      <div class="service-header">
+        <div class="service-title">
+          <h3>Interior Design</h3>
+          <p class="subtitle">Bespoke & Functional</p>
+        </div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="service-content">
+        <p>
+          Our interior design services are tailored to reflect your unique style and needs,
+          blending functionality with personalized aesthetics. We create spaces that elevate well-being
+          and resonate with your personal expression.
+        </p>
+      </div>
+    </div>
+
+    <!-- 2. Service -->
+    <div class="service-item">
+      <div class="service-header">
+        <div class="service-title">
+          <h3>Consultation</h3>
+          <p class="subtitle">Personalized Guidance</p>
+        </div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="service-content">
+        <p>
+          We provide personalized consultations to guide you in achieving your design vision.
+          From conceptualization to realization, we work closely to bring your ideas to life
+          and create interiors that truly reflect your individuality.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. Service -->
+    <div class="service-item">
+      <div class="service-header">
+        <div class="service-title">
+          <h3>Renovation</h3>
+          <p class="subtitle">Transforming Existing Spaces</p>
+        </div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="service-content">
+        <p>
+          Our renovation services breathe new life into existing spaces, focusing on functionality and modern aesthetics.
+          We believe that every space has the potential to enhance well-being and inspire harmony.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<div class="section-divider"></div>
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="portfolio">
+  <div class="section-inner">
+    <h2>Portfolio</h2>
+
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><div class="image-wrapper"><img src="img/1.jpg" alt="Portfolio 1" /></div></div>
+        <div class="swiper-slide"><div class="image-wrapper"><img src="img/2.jpg" alt="Portfolio 2" /></div></div>
+        <div class="swiper-slide"><div class="image-wrapper"><img src="img/3.jpg" alt="Portfolio 3" /></div></div>
+        <div class="swiper-slide"><div class="image-wrapper"><img src="img/4.jpg" alt="Portfolio 4" /></div></div>
+        <div class="swiper-slide"><div class="image-wrapper"><img src="img/5.jpg" alt="Portfolio 5" /></div></div>
+        <div class="swiper-slide"><div class="image-wrapper"><img src="img/6.jpg" alt="Portfolio 6" /></div></div>
+        <div class="swiper-slide"><div class="image-wrapper"><img src="img/7.jpg" alt="Portfolio 7" /></div></div>
+        <div class="swiper-slide"><div class="image-wrapper"><img src="img/8.jpg" alt="Portfolio 8" /></div></div>
+        <div class="swiper-slide"><div class="image-wrapper"><img src="img/9.jpg" alt="Portfolio 9" /></div></div>
+        <div class="swiper-slide"><div class="image-wrapper"><img src="img/10.jpg" alt="Portfolio 10" /></div></div>
+        <div class="swiper-slide"><div class="image-wrapper"><img src="img/11.jpg" alt="Portfolio 11" /></div></div>
+        <div class="swiper-slide"><div class="image-wrapper"><img src="img/12.jpg" alt="Portfolio 12" /></div></div>
+        <div class="swiper-slide"><div class="image-wrapper"><img src="img/13.jpg" alt="Portfolio 13" /></div></div>
+        <div class="swiper-slide"><div class="image-wrapper"><img src="img/14.jpg" alt="Portfolio 14" /></div></div>
+        </div>
+
+      <!-- Navigációs pöttyök -->
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="section-inner">
+      <h2>Contact Us</h2>
+      <form>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name <span>*</span></label>
+            <input type="text" required />
+          </div>
+          <div class="form-group">
+            <label>Last Name <span>*</span></label>
+            <input type="text" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email <span>*</span></label>
+            <input type="email" required />
+          </div>
+          <div class="form-group">
+            <label>Company Name</label>
+            <input type="text" />
+          </div>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="section-inner">
+      <p class="owner-name">Bencová Lara</p>
+      <hr />
+      <div class="social-icons">
+        <a href="https://www.instagram.com/laaurainteriordesign" target="_blank">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" />
+        </a>
+        <a href="https://www.facebook.com/share/185pyf9XVz" target="_blank">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" />
+        </a>
+        <a href="https://www.tiktok.com/@laaurainteriordesign" target="_blank">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok" />
+        </a>
+      </div>
+      <p class="email">laaurainteriors@gmail.com</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("sideNav").classList.toggle("active");
+    }
+    const swiper = new Swiper(".mySwiper", {
+    loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
+  </script>
+  <script>
+  // Accordion működés
+  document.querySelectorAll(".service-header").forEach(header => {
+    header.addEventListener("click", () => {
+      const item = header.parentElement;
+      item.classList.toggle("active");
+    });
+  });
+</script>
+<script>
+  window.addEventListener("scroll", function () {
+    const topBar = document.querySelector(".top-bar");
+    if (window.scrollY > 10) {
+      topBar.classList.add("scrolled");
+    } else {
+      topBar.classList.remove("scrolled");
+    }
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,518 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #faecd4; /* bézs szín */
+  color: #333;
+}
+
+.section-inner {
+  max-width: 1000px;
+  margin: auto;
+  padding: 4rem 2rem;
+  text-align: center; /* <<< új sor */
+}
+
+.hero, .about, .services, .portfolio, .contact, footer {
+  width: 100%;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  text-align: center;
+  color: #666;
+}
+
+.about h2, .services h2, .portfolio h2, .contact h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.services {
+  background-color: #faecd4;
+  padding: 4rem 2rem;
+}
+
+.service-item {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 1rem;
+}
+
+/* Felső sor: cím + nyíl */
+.service-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 1rem 0;
+}
+
+/* Mobilbarát javítás */
+@media (max-width: 768px) {
+  .service-header {
+    flex-direction: row;       /* marad egy sorban */
+    align-items: center;
+  }
+
+  .service-title {
+    flex: 1;                   /* vegye fel a helyet */
+    text-align: left;          /* balra igazítva */
+  }
+
+  .arrow {
+    margin-left: 10px;
+  }
+}
+
+/* Rejtett tartalom alapból */
+.service-item {
+  border-bottom: 1px solid #000; /* fekete és kicsit vastagabb */
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem; /* opcionális: kis tér a vonal előtt */
+}
+
+/* Felső sor: cím + alcím + nyíl egy sorban */
+.service-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 1rem 0;
+}
+
+/* Bal oldalt: cím + alcím */
+.service-title {
+  text-align: left; /* A főcím és alcím blokk balra igazítva */
+}
+
+.service-title .subtitle {
+  text-align: left;  /* <<< Balra húzzuk */
+  display: block;    /* külön sorban marad */
+  margin: 0.3rem 0 0 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.service-title h3 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.service-title .subtitle {
+  margin: 0.3rem 0 0 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Jobbra a nyíl */
+.arrow {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+/* Rejtett tartalom */
+.service-content {
+  display: none;
+  padding: 0.5rem 0 1rem 0;
+  text-align: left;
+}
+
+.service-item.active .service-content {
+  display: block;
+}
+
+.service-item.active .arrow {
+  transform: rotate(180deg);
+}
+
+.placeholder-text {
+  font-style: italic;
+  text-align: center;
+  color: #888;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.form-group {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* <<< középre igazítja a beviteli mezőt */
+  text-align: center;  /* <<< középre igazítja a címkét */
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  text-align: center; /* <<< új sor */
+}
+
+label span {
+  color: red;
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+button[type="submit"] {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  border: none;
+  background-color: #000;
+  color: white;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button[type="submit"]:hover {
+  background-color: #333;
+}
+
+footer .owner-name {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+footer hr {
+  border: none;
+  border-top: 1px solid #000;
+  margin: 1rem auto;
+  width: 60%;
+}
+
+footer .social-icons {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+footer .social-icons a {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+footer .social-icons img {
+  width: 24px;
+  height: 24px;
+  filter: grayscale(100%);
+  transition: 0.3s;
+}
+
+footer .social-icons img:hover {
+  filter: grayscale(0%);
+}
+
+footer .email {
+  text-align: center;
+  margin-top: 1rem;
+  color: #555;
+}
+
+.menu-icon {
+  position: fixed;
+  top: 8px;
+  right: 15px;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.side-nav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #faecd4; /* <<< BÉZS háttér */
+  overflow-x: hidden;
+  transition: 0.3s;
+  padding-top: 60px;
+  z-index: 1000;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+}
+
+.side-nav.active {
+  width: 250px;
+}
+
+.side-nav a {
+  padding: 10px 30px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: #333;
+  display: block;
+  transition: 0.2s;
+}
+
+.side-nav a:hover {
+  background-color: #f2f2f2;
+}
+
+.side-nav .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 2rem;
+  text-decoration: none;
+}
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 2rem; /* kis térköz a kép és a szöveg között */
+  border-radius: 8px;   /* opcionális: kerekített sarkok */
+}
+
+.hero {
+  padding: 0;
+}
+
+.hero .section-inner {
+  max-width: 1000px;
+  margin: auto;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+.swiper {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+
+/* a slide = keret */
+.swiper-slide {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* belső wrapper – hogy az img tényleg középen legyen */
+.image-wrapper {
+  width: 100%;
+  height: 600px;
+  min-height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #faecd4; /* halvány bézs háttér (pl. ha "kicsi" a kép) */
+}
+
+.image-wrapper img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.swiper-pagination-bullet {
+  background-color: #aaa;  /* halványabb pöttyök */
+  opacity: 1;              /* ne legyen áttetsző */
+}
+
+/* Aktív pötty – TELJESEN FEKETE, nem világít */
+.swiper-pagination-bullet-active {
+  background-color: #000 !important; /* teljes fekete */
+  box-shadow: none !important;       /* semmi világítás/fénylés */
+  opacity: 1;
+}
+.intro-header {
+  background-color: rgb(250, 236, 212); /* bézses háttér (egységes az oldallal) */
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+}
+
+.intro-logo {
+  max-width: 200px;  /* állíthatod: kisebb/nagyobb logó */
+  margin-bottom: 1.5rem;
+}
+
+.intro-header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.intro-header p {
+  font-size: 1.1rem;
+  font-weight: normal;
+  color: #333;
+}
+
+.hero {
+  width: 100%;
+  height: 500px; /* magasság, igény szerint növelhető */
+  
+  /* Háttérkép */
+  background-image: url("img/fejleckep.jpg"); /* <-- FONTOS: pontos elérési út! */
+  background-size: cover;       /* kitölti a szekciót */
+  background-position: center;  /* középre igazítja */
+  background-repeat: no-repeat;
+
+  display: flex;
+  justify-content: center;  /* vízszintesen közép */
+  align-items: center;      /* függőlegesen közép */
+  text-align: center;
+  position: relative;
+}
+
+/* A középen lévő halvány doboz */
+.hero-content {
+  background-color: rgba(250, 236, 212, 0.6);
+  padding: 1rem 2rem;       /* csökkentett belső térköz */
+  border-radius: 10px;
+  max-width: 500px;
+}
+
+/* Logó mérete + kevesebb tér alatta */
+.hero-logo {
+  max-width: 130px;         /* kicsit még kisebb logó */
+  display: block;
+  margin: 0 auto 0.3rem;    /* logó alatt csak 0.3rem térköz marad */
+}
+
+/* Szövegek közelebb kerülnek a logóhoz */
+.hero h1 {
+  font-size: 1.8rem;
+  margin: 0.2rem 0;         /* szinte alig van tér a szöveg felett/alatt */
+}
+
+.hero p {
+  font-size: 1.1rem;
+  margin: 0.2rem 0 0;       /* szinte ráül a cím alá */
+}
+.about-section {
+  background-color: #faecd4; /* egységes háttér */
+  padding: 4rem 2rem;
+}
+
+.about-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Mobilon törje egymás alá */
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;  /* szöveg felül, kép alul */
+    text-align: center;      /* középre igazítjuk mobilon */
+  }
+
+  .about-text {
+    text-align: center;
+  }
+}
+
+
+/* Jobb oldal: kép */
+.about-image {
+  flex: 1;
+  text-align: center;
+}
+
+.about-image img {
+  max-width: 250px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+/* Általános reszponzív alap */
+* {
+  box-sizing: border-box;
+}
+
+.section-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+.services,
+.about-section,
+.portfolio,
+.contact {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.section-divider {
+  height: 2px;
+  background: rgba(0, 0, 0, 0.1); /* nagyon halvány szürke */
+  margin: 3rem auto; /* elegáns tér fölötte és alatta */
+  width: 50%;        /* nem tölti ki teljesen a képernyőt */
+  border-radius: 2px;
+}
+.top-bar {
+  position: fixed;              /* mindig az oldal tetején marad */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #faecd4; /* bézs alap háttér */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Görgetéskor elhalványított változat */
+.top-bar.scrolled {
+  background-color: rgba(250, 236, 212, 0.85); /* halványabb háttér */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);   /* kis árnyék, elegáns elválasztás */
+}
+
+/* Belső tartalom: logó + név egymás mellett */
+.top-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* kis tér a logó és a név között */
+  padding-left: 1rem; /* kis belső margó balra */
+}
+
+/* Logó a sávban */
+.header-logo {
+  height: 60px; /* arányos méret */
+  object-fit: contain;
+}
+
+/* Oldal neve mellette */
+.site-name {
+  font-size: 1.3rem;
+  color: #000;
+}
