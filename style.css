@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #faecd4; /* bézs szín */
+  background-color: #F5F1ED; /* bézs szín */
   color: #333;
 }
 
@@ -44,7 +44,7 @@ body {
 }
 
 .services {
-  background-color: #faecd4;
+  background-color: #F5F1ED;
   padding: 4rem 2rem;
 }
 
@@ -260,7 +260,7 @@ footer .email {
   position: fixed;
   top: 0;
   right: 0;
-  background-color: #faecd4; /* <<< BÉZS háttér */
+  background-color: #F5F1ED; /* <<< BÉZS háttér */
   overflow-x: hidden;
   transition: 0.3s;
   padding-top: 60px;
@@ -333,7 +333,7 @@ footer .email {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #faecd4; /* halvány bézs háttér (pl. ha "kicsi" a kép) */
+  background-color: #F5F1ED; /* halvány bézs háttér (pl. ha "kicsi" a kép) */
 }
 
 .image-wrapper img {
@@ -418,7 +418,7 @@ footer .email {
   margin: 0.2rem 0 0;       /* szinte ráül a cím alá */
 }
 .about-section {
-  background-color: #faecd4; /* egységes háttér */
+  background-color: #F5F1ED; /* egységes háttér */
   padding: 4rem 2rem;
 }
 
@@ -484,7 +484,7 @@ footer .email {
   left: 0;
   width: 100%;
   height: 60px;
-  background-color: #faecd4; /* bézs alap háttér */
+  background-color: #F5F1ED; /* bézs alap háttér */
   z-index: 1000;
   display: flex;
   align-items: center;
