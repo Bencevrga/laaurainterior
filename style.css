@@ -204,8 +204,22 @@ button[type="submit"]:hover {
   background-color: #333;
 }
 
-footer .owner-name {
+footer {
+  width: 100%;
+  background-color: #e3ded9; /* halvány szürkés árnyalat a #F5F1ED-hez */
+  padding: 2rem 1rem 1rem;
+  margin-top: 4rem;
+  color: #333;
   text-align: center;
+}
+
+footer .section-inner {
+  padding: 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+footer .owner-name {
   font-size: 1.3rem;
   font-weight: bold;
   margin-bottom: 1rem;
@@ -219,7 +233,6 @@ footer hr {
 }
 
 footer .social-icons {
-  text-align: center;
   margin: 1rem 0;
 }
 
@@ -240,7 +253,6 @@ footer .social-icons img:hover {
 }
 
 footer .email {
-  text-align: center;
   margin-top: 1rem;
   color: #555;
 }
@@ -342,16 +354,25 @@ footer .email {
   max-height: 100%;
   object-fit: contain;
 }
-.swiper-pagination-bullet {
-  background-color: #aaa;  /* halványabb pöttyök */
-  opacity: 1;              /* ne legyen áttetsző */
+.swiper-pagination {
+  position: relative;
+  bottom: 0;
+  margin-top: 20px;
+  text-align: center;
 }
 
-/* Aktív pötty – TELJESEN FEKETE, nem világít */
-.swiper-pagination-bullet-active {
-  background-color: #000 !important; /* teljes fekete */
-  box-shadow: none !important;       /* semmi világítás/fénylés */
+.swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background-color: #aaa;
   opacity: 1;
+  margin: 0 5px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #000 !important;
 }
 .intro-header {
   background-color: rgb(250, 236, 212); /* bézses háttér (egységes az oldallal) */
@@ -429,6 +450,7 @@ footer .email {
   display: flex;
   align-items: center;
   gap: 2rem;
+  flex-direction: row-reverse;
 }
 
 /* Mobilon törje egymás alá */
@@ -439,7 +461,7 @@ footer .email {
   }
 
   .about-text {
-    text-align: center;
+    text-align: left;
   }
 }
 
@@ -455,6 +477,45 @@ footer .email {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
+
+/* Bal oldal: kép */
+.about-section {
+  background-color: #F5F1ED;
+  padding: 4rem 2rem;
+}
+
+.about-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Mobilra törés */
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.about-images {
+  flex: 1;
+  text-align: center;
+}
+
+.about-images img {
+  max-width: 350px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-text {
+  flex: 2;
+  text-align: left;
+}
+
 /* Általános reszponzív alap */
 * {
   box-sizing: border-box;
@@ -554,4 +615,63 @@ footer .email {
 
 .popup-content button:hover {
   background-color: #333;
+}
+.form-group.full-width {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+textarea {
+  width: 100%;         
+  max-height: 300px;         /* maximum magasság */
+  overflow-y: auto;          /* görgethető, ha túl magas lenne */
+  resize: none;              /* felhasználó nem tudja átméretezni */
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  line-height: 1.5;
+  font-family: 'Dream Avenue', sans-serif;
+}
+
+.side-nav-contact {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  font-size: 0.9rem;
+  color: #333;
+  text-align: left;
+}
+
+.side-nav-contact p {
+  margin: 0.3rem 0;
+  line-height: 1.4;
+}
+
+.side-nav-social {
+  display: flex;
+  justify-content: flex-start;
+  align-items: left;
+  margin-top: 0.5rem;
+}
+
+.side-nav-social a img {
+  width: 18px;
+  height: 18px;
+  filter: grayscale(100%);
+  transition: 0.3s;
+}
+
+.side-nav-social a img:hover {
+  filter: grayscale(0%);
+}
+
+.side-nav-divider {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 0.5rem 0 0.8rem;
+  width: 100%;
 }
