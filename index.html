@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="style.css" />
   <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Work+Sans:wght@300;400&display=swap" rel="stylesheet">
 
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -44,7 +45,7 @@
     <a href="#contact" onclick="toggleMenu()">Contact Us</a>
     <div class="side-nav-contact">
          <hr class="side-nav-divider" />   
-  <p><strong>📞Phone:<br></strong> +421 91 726 6710</p>
+  <p><strong>📞Phone:<br></strong> +421 917 266 710</p>
   <p><strong>✉️Email:<br></strong> laaurainterior@gmail.com</p>
   <div class="side-nav-social">
     <a href="https://www.instagram.com/laaurainteriors" target="_blank">
@@ -122,13 +123,25 @@
         <span class="arrow">▼</span>
       </div>
       <div class="service-content">
+        <p>Get clear, personalized guidance on layout, colors, and furniture—whether it’s for one room or your entire home.</p>
+        <a href="Consultation.html" class="more-button">More...</a>
+      </div>
+    </div>
+
+    <!-- 4. Service -->
+    <div class="service-item">
+      <div class="service-header">
+        <div class="service-title">
+          <h3>Interior Design</h3>
+          <p class="subtitle">Craving a space that feels more like you?</p>
+        </div>
+        <span class="arrow">▼</span>
+      </div>
+      <div class="service-content">
         <p>
-          Get clear, personalized guidance on layout, colors, and furniture—whether it’s for one room or your entire home.</p>
-        <p>60 or 90-minute sessions<br>
-          Tailored to your needs<br>
-          Available online or in person<br>
-          📩 Message me to book your free session!<br>
+          I turn design visions into timeless, livable spaces that feel both luxurious and personal.
         </p>
+        <a href="Interiordesign.html" class="more-button">More...</a>
       </div>
     </div>
 
@@ -143,15 +156,9 @@
       </div>
       <div class="service-content">
         <p>
-          I create photorealistic 3D visuals to help you picture the final look, including:
+          I create photorealistic 3D visuals to help you picture the final look.
         </p>
-        <p>
-          Color palette<br>
-          Furniture layout<br>
-          Mood and atmosphere<br>
-          Perfect for private clients or busy interior designers.<br>
-          📩 Let’s bring your vision to life—message me!<br>
-        </p>  
+        <a href="Visualization.html" class="more-button">More...</a>
       </div>
     </div>
 
@@ -169,14 +176,7 @@
         <p>
           I help make your space look clean, stylish, and inviting to attract buyers or simply breathe new life into it.
         </p>
-        <p>
-          Mood & color direction<br>
-          Space optimization<br>
-          Styling & furnishing tips<br>
-          Optional 3D visuals<br>
-          ✅ Ideal for listings, rentals, or quick refreshes<br>
-          📩 Let’s create that wow effect—get in touch!
-        </p>
+        <a href="Homestaging.html" class="more-button">More...</a>
       </div>
     </div>
 
@@ -233,7 +233,7 @@
 <section class="contact" id="contact">
   <div class="section-inner">
     <h2>Contact Us</h2>
-    <form id="contact-form" action="https://formsubmit.co/2005vrgkng@gmail.com" method="POST">
+    <form id="contact-form" action="https://formsubmit.co/laaurainterior@gmail.com" method="POST">
       <div class="form-row">
         <div class="form-group">
           <label>First Name <span>*</span></label>
@@ -371,6 +371,10 @@
   const swiperw = new Swiper(".swiper", {
   loop: false,
   slidesPerView: 1,
+  autoplay: {
+    delay: 3000,     // 3 másodpercenként vált
+    disableOnInteraction: false, // kézzel húzás után is folytatja automatikusan
+  },
   pagination: {
   el: ".swiper-pagination",
   clickable: true,

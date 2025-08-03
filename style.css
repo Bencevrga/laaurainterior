@@ -1,16 +1,30 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Dream Avenue', sans-serif;
+  font-family: 'Work Sans', sans-serif;
   background-color: #F5F1ED; /* bézs szín */
   color: #333;
+}
+
+/* Címsorokhoz, nevekhez, kiemelésekhez */
+h1, h2, h3, .site-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Törzsszöveghez, bekezdésekhez */
+body, p, li, a {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
 }
 
 .section-inner {
   max-width: 1000px;
   margin: auto;
   padding: 4rem 2rem;
-  text-align: center; /* <<< új sor */
+  text-align: left; /* <<< új sor */
 }
 
 .hero, .about, .services, .portfolio, .contact, footer {
@@ -92,7 +106,7 @@ body {
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
 }
 
 /* Bal oldalt: cím + alcím */
@@ -109,7 +123,7 @@ body {
 }
 
 .service-title h3 {
-  margin: 0;
+  margin-bottom: 0.3rem;
   font-size: 1.4rem;
 }
 
@@ -128,7 +142,7 @@ body {
 /* Rejtett tartalom */
 .service-content {
   display: none;
-  padding: 0.5rem 0 1rem 0;
+  padding: 0.3rem 0 0.5rem;
   text-align: left;
 }
 
@@ -223,6 +237,7 @@ footer .owner-name {
   font-size: 1.3rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  font-family: 'Cormorant Garamond', serif !important;
 }
 
 footer hr {
@@ -419,7 +434,7 @@ footer .email {
   background-color: rgba(245, 241, 237, 0.85);
   padding: 1rem 2rem;       /* csökkentett belső térköz */
   border-radius: 10px;
-  max-width: 500px;
+  width: 500px;
 }
 
 /* Logó mérete + kevesebb tér alatta */
@@ -461,7 +476,7 @@ footer .email {
   }
 
   .about-text {
-    text-align: left;
+    text-align: center;
   }
 }
 
@@ -633,7 +648,7 @@ textarea {
   border-radius: 5px;
   box-sizing: border-box;
   line-height: 1.5;
-  font-family: 'Dream Avenue', sans-serif;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .side-nav-contact {
@@ -675,3 +690,104 @@ textarea {
   margin: 0.5rem 0 0.8rem;
   width: 100%;
 }
+
+.more-button {
+  display: inline-block;
+  margin-top: 0.5rem;  /* <<< kisebb térköz */
+  padding: 0.6rem 1.8rem;
+  background-color: #000;
+  color: #fff;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.more-button:hover {
+  background-color: #333;
+}
+
+.back-button {
+  display: inline-block;
+  margin: 2rem;
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Felső fix sáv */
+.top-bar {
+  position: fixed;              /* mindig az oldal tetején marad */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #F5F1ED; /* bézs alap háttér */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  justify-content: space-between;
+}
+
+/* Görgetéskor halványabb háttér és árnyék */
+.top-bar.scrolled {
+  background-color: rgba(245, 241, 237, 0.85);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.top-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-logo {
+  height: 60px;
+  object-fit: contain;
+}
+
+.site-name {
+  font-size: 1.3rem;
+  color: #000;
+}
+
+/* BACK TO HOME gomb a jobb oldalon */
+.back-home-button {
+  background-color: #000;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+  margin-left: auto;
+  margin-right: 0.5rem; 
+}
+
+.back-home-button:hover {
+  background-color: #333;
+}
+
+.text-image-container {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.about-images {
+  flex: 1;
+  min-width: 250px;
+  text-align: center;
+}
+
+.about-images img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.service-block {
+  flex: 2;
+  min-width: 250px;
+  text-align: left;}
