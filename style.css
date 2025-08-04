@@ -476,7 +476,9 @@ footer .email {
   }
 
   .about-text {
+    justify-content: center;
     text-align: center;
+    align-items: center;
   }
 }
 
@@ -485,34 +487,21 @@ footer .email {
 .about-image {
   flex: 1;
   text-align: center;
+  align-items: center;
 }
 
 .about-image img {
   max-width: 350px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  align-items: center;
 }
 
 /* Bal oldal: kép */
 .about-section {
   background-color: #F5F1ED;
   padding: 4rem 2rem;
-}
-
-.about-container {
-  max-width: 1000px;
-  margin: 0 auto;
-  display: flex;
   align-items: center;
-  gap: 2rem;
-}
-
-/* Mobilra törés */
-@media (max-width: 768px) {
-  .about-container {
-    flex-direction: column;
-    text-align: center;
-  }
 }
 
 .about-images {
@@ -527,8 +516,10 @@ footer .email {
 }
 
 .about-text {
+  justify-content: center;
   flex: 2;
   text-align: left;
+  align-items: center;
 }
 
 /* Általános reszponzív alap */
