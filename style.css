@@ -272,6 +272,17 @@ footer .email {
   color: #555;
 }
 
+.email a {
+  color: inherit;              /* Örökli a szülő színt */
+  text-decoration: none;       /* Nincs aláhúzás */
+  font-style: normal;
+}
+
+.email a:hover {
+  text-decoration: underline;  /* Opcionális: hoverre aláhúzás */
+  color: #000;                 /* Opcionális: hoverre sötétebb szín */
+}
+
 .menu-icon {
   position: fixed;
   top: 8px;
@@ -468,10 +479,24 @@ footer .email {
   flex-direction: row-reverse;
 }
 
+.about-container-us {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-direction: row-reverse;
+}
+
 /* Mobilon törje egymás alá */
 @media (max-width: 768px) {
   .about-container {
     flex-direction: column;  /* szöveg felül, kép alul */
+    text-align: center;      /* középre igazítjuk mobilon */
+  }
+
+  .about-container-us {
+    flex-direction: column-reverse;  /* szöveg felül, kép alul */
     text-align: center;      /* középre igazítjuk mobilon */
   }
 
@@ -655,6 +680,9 @@ textarea {
 .side-nav-contact p {
   margin: 0.3rem 0;
   line-height: 1.4;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
 }
 
 .side-nav-social {
@@ -782,3 +810,40 @@ textarea {
   flex: 2;
   min-width: 250px;
   text-align: left;}
+
+  .clean-email {
+  all: unset;                 /* alapból mindent törlünk: padding, margin, szín stb. */
+  display: inline;            /* ne legyen blokkos */
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.clean-email:hover {
+  text-decoration: underline; /* opcionális: kis aláhúzás hoverre */
+}
+
+.side-nav-contact a.clean-email {
+  font-size: 1rem;
+  padding: 0 !important;       /* megszünteti a belső margót */
+  margin: 0 !important;
+  display: inline !important;  /* ne blokkosan viselkedjen */
+}
+
+.phone-link {
+  text-decoration: none;
+  color: #333; /* vagy más szín */
+}
+
+.side-nav-contact a.phone-link {
+  font-size: 1rem;
+  padding: 0 !important;       /* megszünteti a belső margót */
+  margin: 0 !important;
+  display: inline !important;  /* ne blokkosan viselkedjen */
+}
+
+.phone-link:hover {
+  text-decoration: underline; /* opcionális: kis aláhúzás hoverre */
+}
