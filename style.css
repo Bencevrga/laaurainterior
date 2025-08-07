@@ -62,11 +62,6 @@ body, p, li, a {
   padding: 4rem 2rem;
 }
 
-.service-item {
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 1rem;
-}
-
 /* Felső sor: cím + nyíl */
 .service-header {
   display: flex;
@@ -95,9 +90,19 @@ body, p, li, a {
 
 /* Rejtett tartalom alapból */
 .service-item {
-  border-bottom: 1px solid #000; /* fekete és kicsit vastagabb */
+  border-bottom: 1px solid #333; /* fekete és kicsit vastagabb */
   margin-bottom: 1rem;
   padding-bottom: 0.5rem; /* opcionális: kis tér a vonal előtt */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #F5F1ED; /* opcionális: világos háttér */
+  border-radius: 8px;         /* finoman lekerekítve */
+  padding: 1rem;              /* egyenletesebb belső tér */
+}
+
+.service-item:hover {
+  transform: scale(1.02); /* enyhe nagyítás */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* finom árnyék */
+  cursor: pointer; /* vizuálisan jelzi, hogy kattintható */
 }
 
 /* Felső sor: cím + alcím + nyíl egy sorban */
@@ -203,19 +208,25 @@ input {
   box-sizing: border-box;
 }
 
-button[type="submit"] {
+.submit-button {
+  background-color: #000;
+  color: #fff;
   padding: 0.75rem 2rem;
   font-size: 1rem;
   border: none;
-  background-color: #000;
-  color: white;
   border-radius: 30px;
   cursor: pointer;
-  transition: 0.2s;
+  transition: all 0.3s ease;
+  font-family: 'Work Sans', sans-serif;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-top: 1rem;
 }
 
-button[type="submit"]:hover {
+.submit-button:hover {
   background-color: #333;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 footer {
@@ -298,12 +309,13 @@ footer .email {
   position: fixed;
   top: 0;
   right: 0;
-  background-color: #F5F1ED; /* <<< BÉZS háttér */
   overflow-x: hidden;
   transition: 0.3s;
   padding-top: 60px;
   z-index: 1000;
-  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+  background: rgba(245, 241, 237, 0.8); /* bézses átlátszó */
+  backdrop-filter: blur(10px);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .side-nav.active {
@@ -318,6 +330,9 @@ footer .email {
   display: block;
   transition: 0.2s;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  font-family: 'Lora', serif;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
 }
 
 .side-nav a:hover {
@@ -712,17 +727,22 @@ textarea {
 
 .more-button {
   display: inline-block;
-  margin-top: 0.5rem;  /* <<< kisebb térköz */
-  padding: 0.6rem 1.8rem;
   background-color: #000;
   color: #fff;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
   border-radius: 30px;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  font-family: 'Work Sans', sans-serif;
+  letter-spacing: 0.5px;
 }
 
 .more-button:hover {
   background-color: #333;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .back-button {
@@ -846,4 +866,23 @@ textarea {
 
 .phone-link:hover {
   text-decoration: underline; /* opcionális: kis aláhúzás hoverre */
+}
+
+/* Swiper fade átmenet – elegáns áttűnés */
+.swiper-fade .swiper-slide {
+  transition: opacity 0.8s ease-in-out;
+}
+
+.side-link {
+  display: block;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  color: #333;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  border-radius: 6px;
+}
+
+.side-link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  transform: translateX(4px); /* finom elmozdulás jobbra */
 }
