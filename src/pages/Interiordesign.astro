@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SideNav from '../components/SideNav.astro';
+---
+
+<BaseLayout title="Interior Design – La Aura Interiors">
+  <Header />
+  <SideNav />
+  <a class="back-home-button" href="/">Back to Home</a>
+
+  <section class="hero">
+    <div class="hero-content" id="hero">
+      <img src="/img/logo.jpg" alt="La Aura Interiors Logo" class="hero-logo" />
+      <h1>Interior Design</h1>
+      <p>Interior Design that reflects your lifestyle — with elegance and intention.</p>
+    </div>
+  </section>
+
+  <section class="section-inner text-image-container" id="interior-design">
+  <!-- TEXT -->
+  <div class="service-block">
+    <h1>Comprehensive Interior Design Services</h1>
+
+    <p class="intro">
+      Transform your property with a full <strong>interior design service</strong> that covers every detail —
+      from concept creation to final styling. Whether it’s a single room or an entire home, I create spaces that
+      are both <strong>functional</strong> and <strong>timelessly elegant</strong>.
+    </p>
+
+    <h2>What’s Included</h2>
+    <ul>
+      <li><strong>Concept development</strong> based on your vision and lifestyle</li>
+      <li><strong>Detailed space planning</strong> for flow, comfort, and usability</li>
+      <li><strong>Material, color, and furniture selection</strong> tailored to your preferences</li>
+      <li><strong>Custom solutions</strong> such as bespoke cabinetry, lighting, and décor</li>
+      <li><strong>End-to-end project guidance</strong> from design boards to final implementation</li>
+    </ul>
+
+    <h2>Perfect For</h2>
+    <ul>
+      <li>Clients seeking a <strong>full home makeover</strong></li>
+      <li>New property owners who want a <strong>cohesive design direction</strong></li>
+      <li>Anyone aiming for a <strong>personalized, high-end space</strong></li>
+    </ul>
+
+    <h2>Why Choose Full Interior Design</h2>
+    <p>
+      With a professional approach, every corner of your home is carefully planned to balance
+      <strong>aesthetics and functionality</strong>. The result is a cohesive environment that
+      <strong>reflects your personality</strong> while adding long-term value to your property.
+    </p>
+
+    <p class="cta">
+      📩 Ready to redesign your space?
+    </p>
+    <div class="cta-buttons">
+      <a href="/#contact" class="more-button">Contact us</a>
+      <a class="more-button" id="btn-messenger" href="https://m.me/61577900795092" target="_blank" rel="noopener">Message us on Messenger</a>
+    </div>
+  </div>
+
+  <!-- IMAGE -->
+  <div class="about-images">
+    <img
+      src="/img/consultation.jpg"
+      alt="Interior design project with living room and modern furniture"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+</section>
+
+
+  <Footer />
+</BaseLayout>

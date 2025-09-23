@@ -1,0 +1,41 @@
+---
+const items = [
+  {
+    initials: "N.K",
+    text: `Hi Lara! 😊
+I would really like to thank you for your detailed and professional work. It helped me a lot that you were always available, kept in touch continuously, and answered all my questions almost immediately. You showed me so many ideas and practical solutions I would have never thought of myself; you tailored them perfectly to my style and vision.
+I'm especially grateful for your speed, flexibility, and the detailed product list.
+I'm sure this will be very useful later on. I can't wait to see the plans come to life!`,
+  },
+  {
+    initials: "K.A",
+    text: `Working with Lara was an absolute pleasure. She quickly understood my needs and transformed it into a design that felt both stylish and deeply functional. Every detail was carefully considered, and the end result exceeded my expectations. Highly recommended!`,
+  },
+  {
+    initials: "N.F.A",
+    text: `Hi! 😊
+I'm so grateful that you created the visual design for my office; it turned out exactly as I imagined! Every piece looked absolutely in style; the color scheme, the furniture, the decoration are all in perfect harmony. It's clear that you pay great attention to detail and understood what I wanted.
+Thank you so much once again!`,
+  },
+  {
+    initials: "V.D",
+    text: `Lara has an amazing eye for detail and balance. She managed to create a space that felt both practical and beautiful, without ever losing sight of our personal style. Her professionalism and warm communication made the whole process enjoyable from start to finish.`,
+  },
+];
+---
+<section class="feedbacks" id="feedbacks">
+  <div class="section-inner">
+    <h2>Feedback</h2>
+    <div class="feedbacks-grid">
+      {items.map((it) => (
+        <article class="feedback-card">
+          <header class="feedback-card-head">
+            <div class="avatar">{it.initials}</div>
+          </header>
+          <p class="feedback-text">{it.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+<div class="section-divider"></div>

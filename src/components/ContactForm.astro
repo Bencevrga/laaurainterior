@@ -1,0 +1,54 @@
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <h2>Contact Us</h2>
+    <form id="contact-form" action="https://formsubmit.co/laaurainterior@gmail.com" method="POST" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name <span>*</span></label>
+          <input type="text" name="first_name" required />
+          <small class="error-message"></small>
+        </div>
+        <div class="form-group">
+          <label>Last Name <span>*</span></label>
+          <input type="text" name="last_name" required />
+          <small class="error-message"></small>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email <span>*</span></label>
+          <input type="email" name="email" required />
+          <small class="error-message"></small>
+        </div>
+        <div class="form-group">
+          <label>Company Name</label>
+          <input type="text" name="company" />
+        </div>
+        <div class="form-group full-width">
+          <label for="message">Your message <span>*</span></label>
+          <textarea id="message" name="message" rows="6" required></textarea>
+          <small class="error-message"></small>
+        </div>
+      </div>
+
+      <!-- hidden fields -->
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_next" value="about:blank" />
+
+      <button type="submit" class="submit-button">Submit</button>
+    </form>
+  </div>
+
+  <!-- popup -->
+  <div id="popup" class="popup" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="popup-content">
+      <p>Thank you for getting in touch!<br/>We appreciate you contacting us and will respond shortly.</p>
+      <button id="popup-ok">OK</button>
+    </div>
+  </div>
+  <script type="module">
+    import initContact from '/src/scripts/contact-form.js';
+    initContact();
+</script>
+</section>

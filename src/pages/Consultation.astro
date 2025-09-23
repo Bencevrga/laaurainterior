@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SideNav from '../components/SideNav.astro';
+---
+
+<BaseLayout title="Consultation – La Aura Interiors">
+  <Header />
+  <SideNav />
+  <a class="back-home-button" href="/">Back to Home</a>
+
+  <section class="hero">
+    <div class="hero-content" id="hero">
+      <img src="/img/logo.jpg" alt="La Aura Interiors Logo" class="hero-logo" />
+      <h1>Consultation</h1>
+      <p>Get personalized design advice crafted just for you.</p>
+    </div>
+  </section>
+
+<section class="section-inner text-image-container" id="consultation">
+  <!-- TEXT -->
+  <div class="service-block">
+    <h1>Interior Design Consultation Tailored to Your Needs</h1>
+
+    <p class="intro">
+      A professional <strong>design consultation</strong> is the perfect starting point if you want expert advice
+      on how to enhance your home’s functionality, aesthetics, and overall atmosphere. Whether it’s a single room
+      refresh or a full property redesign, I provide actionable guidance you can implement right away.
+    </p>
+
+    <h2>What You Get</h2>
+    <ul>
+      <li><strong>Personalized advice</strong> on layout, colors, furniture placement, and décor</li>
+      <li><strong>Space planning tips</strong> to maximize flow and usability</li>
+      <li><strong>Material &amp; product recommendations</strong> based on style and budget</li>
+      <li><strong>Step-by-step suggestions</strong> so you can move forward with confidence</li>
+    </ul>
+
+    <h2>Perfect For</h2>
+    <ul>
+      <li>Homeowners seeking <strong>professional guidance</strong> before making big changes</li>
+      <li>Clients who want <strong>quick, budget-friendly design tips</strong></li>
+      <li>Those considering a <strong>larger renovation</strong> and needing expert direction first</li>
+    </ul>
+
+    <h2>Why It Works</h2>
+    <p>
+      A consultation saves time, reduces costly mistakes, and ensures your design aligns with both your
+      <strong>style preferences</strong> and your <strong>lifestyle needs</strong>. Even one session can bring
+      clarity and transform how you approach your space.
+    </p>
+
+    <p class="cta">
+      📩 Ready to get expert advice? 
+    </p>
+    <div class="cta-buttons">
+      <a href="/#contact" class="more-button">Contact us</a>
+      <a class="more-button" id="btn-messenger" href="https://m.me/61577900795092" target="_blank" rel="noopener">Message us on Messenger</a>
+    </div>
+    </div>
+
+  <!-- IMAGE -->
+  <div class="about-images">
+    <img
+      src="/img/consultation.jpg"
+      alt="Interior design consultation with moodboard and material samples"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+</section>
+<script type="module" src="/src/scripts/messenger-deeplink.js"></script>
+
+
+  <Footer />
+</BaseLayout>

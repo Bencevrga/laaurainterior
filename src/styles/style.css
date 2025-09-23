@@ -1,0 +1,1799 @@
+/* ===================================================================Global reset & variables=================================================================== */
+* {
+	box-sizing: border-box;
+}
+:root{
+	/* Layout */
+	--max-w: 1000px;
+	--topbar-h: 120px;
+	--topbar-h-small: 90px;
+	/* <<< dupla magasságú fejléc */
+	/* Z-index layering */
+	--z-overlay: 1900;
+	--z-side-nav: 2000;
+	--z-topbar: 3000;
+	--z-menu-icon: 4000;
+	/* Colors */
+	--bg: #F5F1ED;
+	--text: #333;
+	--muted: #666;
+}
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Work Sans', sans-serif;
+	background-color: var(--bg);
+	color: var(--text);
+	/* A fix topbar ne takarja ki a tartalmat */
+	padding-top: var(--topbar-h);
+}
+/* Headings */
+h1,h2,h3 {
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+}
+/* Paragraphs/links/list */
+body, p, li, a {
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 300;
+	line-height: 1.6;
+}
+.section-inner {
+	max-width: var(--max-w);
+	margin: 0 auto;
+	padding: 4rem 2rem;
+	text-align: left;
+}
+/* Common sections */
+.hero, .about, .services, .portfolio, .contact, footer {
+	width: 100%;
+}
+.hero h1 {
+	font-size: 3rem;
+	font-weight: 700;
+	margin-bottom: 1rem;
+	text-align: center;
+}
+.hero p {
+	font-size: 1.5rem;
+	text-align: center;
+	color: var(--muted);
+}
+.about h2, .services h2, .portfolio h2, .contact h2 {
+	text-align: center;
+	font-size: 2rem;
+	margin-bottom: 1rem;
+}
+.subtitle {
+	font-size: 1.2rem;
+	text-align: center;
+	color: var(--muted);
+	margin-bottom: 1rem;
+}
+/* ===================================================================Header / Top bar (fixed, double height)=================================================================== */
+.top-bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 120px;
+	/* alapmagasság */
+	background-color: #E6DED6;
+	/* bézses szín */
+	z-index: var(--z-topbar);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	transition: height 0.35s ease, background-color 0.35s ease, box-shadow 0.35s ease;
+}
+/* Görgetés után kisebb + áttetszőbb */
+.top-bar.scrolled {
+	height: 90px;
+	/* kisebb */
+	background-color: rgba(230, 222, 214, 0.92);
+	/* áttetszőbb */
+	box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+	/* kis árnyék */
+}
+.top-bar-inner {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding-left: 1rem;
+	width: 100%;
+}
+/* Logó mérete igazodik a magasabb topbarhoz */
+.header-logo {
+	height: calc(var(--topbar-h) - 20px);
+	/* pl. 100px a 120-ból */
+	object-fit: contain;
+}
+/* Globális hamburger – mindig elérhető, felül marad */
+.menu-icon {
+	position: fixed;
+	top: 8px;
+	right: 15px;
+	font-size: 2rem;
+	cursor: pointer;
+	z-index: var(--z-menu-icon);
+	visibility: visible;
+	pointer-events: auto;
+}
+/* BACK TO HOME gomb (szolgáltatás oldalak) */
+.back-home-button {
+	background-color: #000;
+	color: #fff;
+	padding: .5rem 1rem;
+	border-radius: 30px;
+	text-decoration: none;
+	font-size: .9rem;
+	transition: background-color .3s;
+	margin-left: auto;
+	margin-right: .5rem;
+}
+.back-home-button:hover {
+	background-color: #333;
+}
+/* ===================================================================Side navigation=================================================================== */
+.side-nav {
+	position: fixed;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 0;
+	/* alapból zárt */
+	overflow-x: hidden;
+	transition: width .3s;
+	padding-top: var(--topbar-h);
+	/* a topbar alól induljon */
+	z-index: var(--z-side-nav);
+	background: rgba(245,241,237,.8);
+	backdrop-filter: blur(10px);
+	box-shadow: 2px 0 10px rgba(0,0,0,.1);
+}
+.side-nav.active {
+	width: 250px;
+}
+.side-nav a {
+	padding: 10px 30px;
+	text-decoration: none;
+	font-size: 1.2rem;
+	color: var(--text);
+	display: block;
+	transition: all .2s ease;
+	border-bottom: 1px solid rgba(0,0,0,.1);
+	font-family: 'Work Sans', sans-serif;
+	letter-spacing: .5px;
+}
+.side-nav a:hover {
+	background-color: var(--bg);
+}
+.side-link {
+	display: block;
+	padding: 1rem 1.5rem;
+	text-decoration: none;
+	color: var(--text);
+	transition: transform .2s ease, background-color .2s ease;
+	border-radius: 6px;
+}
+.side-link:hover {
+	background-color: rgba(0,0,0,.05);
+	transform: translateX(4px);
+}
+/* Side-nav footer/contact */
+.side-nav-contact {
+	position: absolute;
+	bottom: 20px;
+	left: 20px;
+	right: 20px;
+	font-size: .9rem;
+	color: var(--text);
+	text-align: left;
+}
+.side-nav-contact p {
+	margin: .3rem 0;
+	line-height: 1.4;
+	display: flex;
+	flex-direction: column;
+}
+.side-nav-social {
+	display: flex;
+	justify-content: flex-start;
+	margin-top: .5rem;
+}
+.side-nav-social a img {
+	width: 18px;
+	height: 18px;
+	filter: grayscale(100%);
+	transition: .3s;
+}
+.side-nav-social a img:hover {
+	filter: grayscale(0%);
+}
+.side-nav-divider {
+	border: none;
+	border-top: 1px solid #ccc;
+	margin: .5rem 0 .8rem;
+	width: 100%;
+}
+/* opcionális close gomb – nálad rejtve marad */
+.close-btn {
+	display: none !important;
+}
+.clean-email, .phone-link {
+	all: unset;
+	display: inline;
+	font-family: inherit;
+	font-size: inherit;
+	color: inherit;
+	cursor: pointer;
+	text-decoration: none;
+}
+.clean-email:hover, .phone-link:hover {
+	text-decoration: underline;
+}
+/* ===================================================================Hero=================================================================== */
+.hero {
+	height: 100vh;
+	/* teljes viewport */
+	margin-top: calc(-1 * var(--topbar-h));
+	background-image: url("img/fejleckep.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	position: relative;
+}
+.hero .section-inner {
+	max-width: var(--max-w);
+	margin: 0 auto;
+	padding: 4rem 2rem;
+	text-align: center;
+}
+/* középen lévő halvány doboz */
+.hero-content {
+	background-color: rgba(245,241,237,.85);
+	padding: 3rem 4rem;
+	border-radius: 50px;
+	width: 700px;
+}
+.hero-logo {
+	max-width: 180px;
+	display: block;
+	margin: 0 auto .3rem;
+}
+.hero h1 {
+	font-size: 2.4rem;
+	margin: .2rem 0;
+}
+.hero p {
+	font-size: 1.3rem;
+	margin: .2rem 0 0;
+}
+/* ===================================================================About=================================================================== */
+.about-section {
+	background-color: var(--bg);
+	padding: 4rem 2rem;
+}
+.about-container,.about-container-us {
+	max-width: var(--max-w);
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+	flex-direction: row-reverse;
+}
+.about-image, .about-images {
+	flex: 1;
+	text-align: center;
+}
+.about-image img,.about-images img {
+	max-width: 350px;
+	border-radius: 10px;
+	box-shadow: 0 4px 10px rgba(0,0,0,.1);
+}
+.about-text {
+	flex: 2;
+	text-align: left;
+}
+@media (max-width: 768px) {
+	.about-container {
+		flex-direction: column;
+		text-align: center;
+	}
+	.about-container-us {
+		flex-direction: column-reverse;
+		text-align: center;
+	}
+	.about-text {
+		justify-content: center;
+		text-align: center;
+		align-items: center;
+	}
+}
+/* Divider */
+.section-divider {
+	height: 2px;
+	background: rgba(0,0,0,.1);
+	margin: 3rem auto;
+	width: 50%;
+	border-radius: 2px;
+}
+/* ===================================================================Services (accordion)=================================================================== */
+.services {
+	background-color: var(--bg);
+	padding: 4rem 2rem;
+}
+.service-item {
+	border-bottom: 1px solid #333;
+	margin-bottom: 1rem;
+	padding: 1rem .5rem .5rem;
+	transition: transform .3s ease, box-shadow .3s ease;
+	background-color: var(--bg);
+	border-radius: 8px;
+}
+.service-item:hover {
+	transform: scale(1.02);
+	box-shadow: 0 4px 15px rgba(0,0,0,.1);
+	cursor: pointer;
+}
+.service-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+	padding: .5rem 0;
+}
+.service-title {
+	text-align: left;
+}
+.service-title h3 {
+	margin-bottom: .3rem;
+	font-size: 1.4rem;
+}
+.service-title .subtitle {
+	text-align: left;
+	display: block;
+	margin: .3rem 0 0 0;
+	font-size: 1rem;
+	color: #555;
+}
+.arrow {
+	font-size: 1.5rem;
+	transition: transform .3s ease;
+}
+.service-content {
+	display: none;
+	padding: .3rem 0 .5rem;
+	text-align: left;
+}
+.service-item.active .service-content {
+	display: block;
+}
+.service-item.active .arrow {
+	transform: rotate(180deg);
+}
+/* ===================================================================Forms / Contact=================================================================== */
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	align-items: center;
+}
+.form-row {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 2rem;
+	width: 100%;
+	max-width: 800px;
+}
+.form-group {
+	flex: 1 1 300px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+label {
+	font-weight: 700;
+	margin-bottom: .5rem;
+	text-align: center;
+}
+label span {
+	color: rgb(0, 0, 0);
+	font-weight: 700;
+}
+input, textarea {
+	width: 100%;
+	padding: .75rem;
+	font-size: 1rem;
+	border: 1px solid #ccc;
+	border-radius: 30px;
+	box-sizing: border-box;
+}
+textarea {
+	max-height: 300px;
+	overflow-y: auto;
+	resize: none;
+	line-height: 1.5;
+	font-family: 'Cormorant Garamond', serif;
+}
+.form-group.full-width {
+	width: 100%;
+	max-width: 500px;
+	margin: 0 auto;
+}
+.submit-button {
+	background-color: #000;
+	color: #fff;
+	padding: .75rem 2rem;
+	font-size: 1rem;
+	border: none;
+	border-radius: 30px;
+	cursor: pointer;
+	transition: all .3s ease;
+	font-family: 'Work Sans', sans-serif;
+	letter-spacing: .5px;
+	display: inline-block;
+	margin-top: 1rem;
+}
+.submit-button:hover {
+	background-color: #333;
+	transform: scale(1.05);
+	box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+/* Popup */
+.popup {
+	position: fixed;
+	inset: 0;
+	background: rgba(245,241,237,.85);
+	display: none;
+	justify-content: center;
+	align-items: center;
+	z-index: 2000;
+}
+.popup-content {
+	background: #fff;
+	padding: 2rem 3rem;
+	border-radius: 10px;
+	text-align: center;
+	box-shadow: 0 5px 15px rgba(0,0,0,.2);
+}
+.popup-content p {
+	font-size: 1.2rem;
+	margin-bottom: 1.5rem;
+}
+.popup-content button {
+	padding: .5rem 1.5rem;
+	background-color: #000;
+	color: #fff;
+	border: none;
+	border-radius: 30px;
+	cursor: pointer;
+}
+.popup-content button:hover {
+	background-color: #333;
+}
+/* ===================================================================Portfolio / Swiper=================================================================== */
+.swiper {
+	width: 100%;
+	max-width: 600px;
+	margin: 0 auto;
+}
+.swiper-slide {
+	width: 100%;
+	height: 300px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+/* Pagination mindig a kép alatt (ne lógjon bele) */
+.portfolio .swiper {
+	overflow: visible;
+}
+.portfolio .swiper .swiper-pagination {
+	position: static !important;
+	margin-top: 16px !important;
+	text-align: center;
+}
+.portfolio .swiper-horizontal > .swiper-pagination-bullets,.portfolio .swiper-pagination-bullets.swiper-pagination-horizontal {
+	bottom: auto !important;
+	top: auto !important;
+	left: 0;
+	width: 100%;
+}
+/* Finom fade átmenet opció (ha kell) */
+.swiper-fade .swiper-slide {
+	transition: opacity .8s ease-in-out;
+}
+/* a swiper ne okozzon vízszintes görgetést */
+.portfolio .swiper {
+	overflow-x: hidden;
+	/* <<< fontos */
+	overflow-y: visible;
+	/* pöttyök látszanak alul */
+	/* kényelmi: adjunk helyet a pöttyöknek a konténeren belül is */
+	padding-bottom: 24px;
+}
+/* a pagination maradjon a kép alatt */
+.portfolio .swiper .swiper-pagination {
+	position: static !important;
+	margin-top: 16px !important;
+	text-align: center;
+}
+/* biztos, ami biztos: a horizontális bottom/top beállításokat kiütjük */
+.portfolio .swiper-horizontal > .swiper-pagination-bullets,.portfolio .swiper-pagination-bullets.swiper-pagination-horizontal {
+	bottom: auto !important;
+	top: auto !important;
+	left: 0;
+	width: 100%;
+}
+/* erősebb védőháló az egész oldalra (ha valami mégis kilógna) */
+html, body {
+	overflow-x: hidden;
+}
+/* ===================================================================Text-image layout (services subpages)=================================================================== */
+.text-image-container {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+	flex-wrap: wrap;
+}
+.about-images {
+	flex: 1;
+	min-width: 250px;
+	text-align: center;
+}
+.about-images img {
+	max-width: 100%;
+	border-radius: 10px;
+	box-shadow: 0 4px 10px rgba(0,0,0,.1);
+}
+.service-block {
+	flex: 2;
+	min-width: 250px;
+	text-align: left;
+}
+/* Links in side-nav contact */
+.side-nav-contact a.clean-email,.side-nav-contact a.phone-link {
+	font-size: 1rem;
+	padding: 0 !important;
+	margin: 0 !important;
+	display: inline !important;
+}
+/* ===================================================================Footer=================================================================== */
+footer {
+	width: 100%;
+	background-color: #e3ded9;
+	padding: 2rem 1rem 1rem;
+	margin-top: 4rem;
+	color: var(--text);
+	text-align: center;
+}
+footer .section-inner {
+	padding: 0;
+	margin: 0 auto;
+	text-align: center;
+}
+footer .owner-name {
+	font-size: 1.3rem;
+	font-weight: 700;
+	margin-bottom: 1rem;
+	font-family: 'Work Sans', sans-serif !important;
+}
+footer hr {
+	border: none;
+	border-top: 1px solid #000;
+	margin: 1rem auto;
+	width: 60%;
+}
+footer .social-icons {
+	margin: 1rem 0;
+}
+footer .social-icons a {
+	display: inline-block;
+	margin: 0 10px;
+}
+footer .social-icons img {
+	width: 24px;
+	height: 24px;
+	filter: grayscale(100%);
+	transition: .3s;
+}
+footer .social-icons img:hover {
+	filter: grayscale(0%);
+}
+footer .email {
+	margin-top: 1rem;
+	color: #555;
+}
+.email a {
+	color: inherit;
+	text-decoration: none;
+}
+.email a:hover {
+	text-decoration: underline;
+	color: #000;
+}
+@media (min-width: 1024px) {
+	/* Hamburger és side-nav elrejtve */
+	.menu-icon {
+		display: none;
+	}
+	.side-nav {
+		display: none !important;
+	}
+	/* Desktop főmenü */
+	.main-nav {
+		display: flex;
+		gap: 40px;
+		/* nagyobb térköz */
+		flex: 1;
+		/* kitölti a rendelkezésre álló teret */
+		justify-content: center;
+		/* <<< középre igazítjuk a menüt */
+		align-items: center;
+	}
+	.main-nav a {
+		text-decoration: none;
+		color: var(--text);
+		font-size: 1.2rem;
+		/* nagyobb betűméret */
+		font-weight: 600;
+		/* vastagabb */
+		letter-spacing: 0.5px;
+		padding: 10px 6px;
+		transition: color .2s ease, opacity .2s ease;
+	}
+	.main-nav a:hover {
+		opacity: 0.7;
+		transform: translateY(-2px);
+	}
+}
+.top-bar-inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+/* Bal: logó fix méretben */
+.header-logo {
+	height: 100px;
+	/* vagy ami illik */
+	object-fit: contain;
+}
+/* Közép: menü mindig a header közepén */
+.main-nav {
+	position: absolute;
+	/* abszolút pozíciózás a headerhez */
+	left: 50%;
+	/* középre húzzuk */
+	transform: translateX(-50%);
+	display: flex;
+	gap: 40px;
+}
+.main-nav a {
+	font-size: 1.3rem;
+	font-weight: 600;
+	text-decoration: none;
+	color: var(--text);
+	transition: opacity .2s ease;
+}
+.main-nav a:hover {
+	opacity: 0.7;
+}
+/* Jobb: üres hely a flex miatt (pl. később ide kerülhet gomb) */
+.spacer {
+	flex: 1;
+}
+.top-bar-inner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	position: relative;
+	/* hogy a menü középre igazítható legyen abszolútban */
+}
+/* Bal oldali logó */
+.header-logo {
+	height: 100px;
+	/* illeszd a top-bar magasságához */
+	object-fit: contain;
+}
+/* Középen a főmenü */
+.main-nav {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	gap: 40px;
+}
+.main-nav a {
+	font-size: 1.2rem;
+	font-weight: 600;
+	text-decoration: none;
+	color: var(--text);
+	transition: opacity .2s ease;
+}
+.main-nav a:hover {
+	opacity: 0.7;
+}
+/* Jobb oldali social ikonok */
+.social-nav {
+	display: flex;
+	gap: 15px;
+	margin-right: 1rem;
+}
+.social-nav img {
+	width: 30px;
+	height: 30px;
+	filter: grayscale(100%);
+	transition: 0.3s;
+}
+.social-nav img:hover {
+	filter: grayscale(0%);
+	transform: translateY(-2px);
+}
+/* ====== Feedbacks ====== */
+.feedbacks h2 {
+	text-align: center;
+	font-size: 2rem;
+	margin-bottom: 1.5rem;
+}
+.feedbacks-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 2rem;
+}
+@media (min-width: 900px) {
+	.feedbacks-grid {
+		grid-template-columns: 1fr 1fr;
+		/* 2 oszlop desktopon */
+	}
+}
+.feedback-card {
+	background: #fff;
+	border-radius: 24px;
+	/* puha kerekítés */
+	padding: 1.25rem 1.25rem 1.5rem;
+	box-shadow: 0 6px 24px rgba(0,0,0,.06);
+	border: 1px solid rgba(0,0,0,.06);
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.feedback-card:hover {
+	transform: scale(1.03);
+	/* kicsi nagyítás */
+	box-shadow: 0 10px 28px rgba(0,0,0,.12);
+	/* erősebb árnyék */
+}
+.feedback-card-head {
+	display: flex;
+	align-items: center;
+	gap: .75rem;
+	margin-bottom: .5rem;
+}
+.feedback-card .avatar {
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: #f0ece8;
+	/* bézses árnyalat a brandhez */
+	color: #000;
+	display: grid;
+	place-items: center;
+	font-weight: 600;
+	letter-spacing: .5px;
+	font-family: 'Cormorant Garamond', serif;
+}
+.feedback-text {
+	white-space: pre-line;
+	/* megtartja az új sorokat */
+	color: var(--text);
+	line-height: 1.7;
+	font-size: 0.98rem;
+}
+/* === Portfolio 5-képes, középső kiemelt, egységes méret, lekerekítés === */
+/* a wrapper maradhat a meglévő .portfolio + .section-inner beállításaidon */
+.portfolio .portfolio-swiper {
+	width: 100%;
+	/* magasabb vizuál: 60–80vh közt;
+	állítsd ízlés szerint */
+	height: clamp(360px, 70vh, 860px);
+}
+.portfolio .swiper-slide img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	/* egységes kitöltés, nem torzul */
+	display: block;
+}
+/* Alap elhalványítás (a távolabbi képek) */
+.portfolio .swiper-slide {
+	opacity: 0.20;
+	transform: scale(0.90);
+	transition: transform .35s ease, opacity .35s ease;
+}
+/* Szomszédok (±1) */
+.portfolio .swiper-slide.is-near-1 {
+	opacity: 0.55;
+	transform: scale(0.95);
+}
+/* Két távolságra (±2) */
+.portfolio .swiper-slide.is-near-2 {
+	opacity: 0.35;
+	transform: scale(0.92);
+}
+/* Aktív (középső) */
+.portfolio .swiper-slide.is-active {
+	opacity: 1;
+	transform: scale(1);
+}
+/* Pagination – 5 dinamikus pötty közvetlen a képek alatt */
+.portfolio .swiper .swiper-pagination {
+	position: relative;
+	margin-top: 12px;
+	text-align: center;
+}
+.portfolio .swiper-pagination-bullet {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: #aaa;
+	opacity: 1;
+	margin: 0 6px;
+	transition: transform .25s ease, background-color .25s ease;
+}
+.portfolio .swiper-pagination-bullet-active {
+	background: #000;
+	/* mindig a középső fekete */
+	transform: scale(1.15);
+}
+/* Biztonság: ne legyen vízszintes scroll a slider miatt */
+.portfolio .swiper {
+	overflow-x: hidden;
+	overflow-y: visible;
+	padding-bottom: 20px;
+	/* hely a pöttyöknek */
+}
+/* === Portfolio slider (5 kép, középső kiemelve) === */
+.portfolio-swiper {
+	width: 100%;
+	height: 70vh;
+}
+.portfolio-swiper .swiper-slide {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: transform 0.35s ease, opacity 0.35s ease;
+}
+.portfolio-swiper .swiper-slide img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 16px;
+}
+/* Pagination pöttyök */
+.portfolio-swiper .swiper-pagination {
+	position: relative;
+	margin-top: 12px;
+	text-align: center;
+}
+.portfolio-swiper .swiper-pagination-bullet {
+	width: 12px;
+	height: 12px;
+	margin: 0 6px;
+	background: #aaa;
+	opacity: 1;
+	border-radius: 50%;
+	transition: transform .25s ease, background-color .25s ease;
+}
+.portfolio-swiper .swiper-pagination-bullet-active {
+	background: #000;
+	transform: scale(1.2);
+}
+/* ===== Portfolio teljes szélesség ===== */
+.portfolio.fullwidth {
+	width: 100vw;
+	/* teljes viewport szélesség */
+	margin-left: 50%;
+	transform: translateX(-50%);
+	/* középre igazítva */
+	padding: 4rem 0;
+	/* felső/alsó tér */
+}
+.portfolio-swiper {
+	width: 100%;
+	height: 70vh;
+	/* nagy vizuális blokk */
+}
+/* Slide-képek */
+.portfolio-swiper .swiper-slide {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: transform 0.35s ease, opacity 0.35s ease;
+}
+.portfolio-swiper .swiper-slide img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	/* egységesen kitölti */
+	border-radius: 16px;
+}
+/* Pagination pöttyök */
+.portfolio-swiper .swiper-pagination {
+	position: relative;
+	margin-top: 12px;
+	text-align: center;
+}
+.portfolio-swiper .swiper-pagination-bullet {
+	width: 12px;
+	height: 12px;
+	margin: 0 6px;
+	background: #aaa;
+	opacity: 1;
+	border-radius: 50%;
+	transition: transform .25s ease, background-color .25s ease;
+}
+.portfolio-swiper .swiper-pagination-bullet-active {
+	background: #000;
+	transform: scale(1.2);
+}
+/* --- Portfolio: teljes szélesség, 5 slide látszik, nincs belső scrollbar --- */
+.portfolio.fullwidth{
+	width: 100vw;
+	margin-left: 50%;
+	transform: translateX(-50%);
+	/* teljes szélességre „kitörés” */
+	padding: 3rem 0 2rem;
+}
+.portfolio.fullwidth > h2{
+	max-width: var(--max-w);
+	margin: 0 auto 1rem;
+	text-align: center;
+}
+/* a Swiper maga teljes szélességű legyen, és ne vágja le a képeket */
+.portfolio-swiper{
+	width: 100%;
+	height: 70vh;
+	/* nagy, elegáns blokk */
+	overflow: visible;
+	/* a scale animáció miatt */
+}
+/* 5 oszlop: a slide-ok szélességét CSS-ből adjuk, a Swiper 'auto'-t kap */
+.portfolio-swiper .swiper-wrapper{
+	align-items: stretch;
+}
+.portfolio-swiper .swiper-slide{
+	/* 5 oszlopnyi szélesség – 4 hézag (24px) levonva */
+	width: calc((100vw - (4 * 24px)) / 5);
+	max-width: 520px;
+	/* hogy ultra széles képernyőn se legyen túl nagy */
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: transform .35s ease, opacity .35s ease;
+	overflow: hidden;
+	border-radius: 16px;
+	/* lekerekített sarkak */
+}
+/* a kép töltse ki a slide-ot, és SOHA ne okozzon scrollt */
+.portfolio-swiper .swiper-slide img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	/* egységes méret/aratás */
+	display: block;
+}
+/* elhalványítás: alap → távoliak;
+közeli → kevésbé halvány;
+középső full */
+.portfolio-swiper .swiper-slide{
+	opacity: .20;
+	transform: scale(.90);
+}
+.portfolio-swiper .swiper-slide.near-2{
+	opacity: .35;
+	transform: scale(.92);
+}
+.portfolio-swiper .swiper-slide.near-1{
+	opacity: .55;
+	transform: scale(.95);
+}
+.portfolio-swiper .swiper-slide.active {
+	opacity: 1;
+	transform: scale(1);
+}
+/* pagination közvetlen a képek alatt, 5 dinamikus pötty, középső fekete */
+.portfolio-swiper .swiper-pagination{
+	position: relative;
+	margin-top: 12px;
+	text-align: center;
+}
+.portfolio-swiper .swiper-pagination-bullet{
+	width: 12px;
+	height: 12px;
+	margin: 0 6px;
+	border-radius: 50%;
+	background: #aaa;
+	opacity: 1;
+	transition: transform .25s ease, background-color .25s ease;
+}
+.portfolio-swiper .swiper-pagination-bullet-active{
+	background: #000;
+	transform: scale(1.15);
+}
+/* reszponzív: tablet 3, mobil 1–2 látszódjon kényelmesen */
+@media (max-width: 1200px){
+	.portfolio-swiper .swiper-slide{
+		width: calc((100vw - (2 * 18px)) / 3);
+	}
+}
+@media (max-width: 640px){
+	.portfolio-swiper .swiper-slide{
+		width: calc(100vw - 32px);
+	}
+	/* 1 kép, kis belső padding érzet */
+}
+/* ===== Portfolio (pf- namespace) – teljes szélesség, 5 látható slide ===== */
+/* törés a központi max-width-ből */
+/* --- Portfolio Swiper legyen teljes szélességű, ne örökölje a 600px max-ot --- */
+.pf.fullwidth {
+	width: 100vw;
+	margin-left: 50%;
+	transform: translateX(-50%);
+	padding: 3rem 0 2rem;
+}
+.pf.fullwidth > h2 {
+	max-width: var(--max-w);
+	margin: 0 auto 2rem;
+	text-align: center;
+	font-size: 2rem;
+}
+.pf-swiper{
+	width: 100vw !important;
+	/* széltől-szélig */
+	max-width: none !important;
+	/* kiüti a globális .swiper {
+		max-width:600px
+}
+	-et */
+	margin: 0 !important;
+	/* ne középre szorítsa a margin:auto */
+	height: 70vh;
+	/* marad a szép magas blokk */
+	overflow: visible;
+}
+/* a slide-okon NINCS width kézzel – a Swiper számolja */
+.pf-swiper .swiper-slide{
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	border-radius: 16px;
+	transition: transform .35s ease, opacity .35s ease;
+	transform: scale(0.96);
+}
+.pf-swiper .swiper-slide img{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+/* halványítás (középső éles, szomszédok fokozatosan) */
+.pf-swiper .swiper-slide {
+	opacity: .20;
+	transform: scale(0.88);
+}
+.pf-swiper .swiper-slide.pf-near-2{
+	opacity: .35;
+	transform: scale(0.90);
+}
+.pf-swiper .swiper-slide.pf-near-1{
+	opacity: .55;
+	transform: scale(0.93);
+}
+.pf-swiper .swiper-slide.pf-active{
+	opacity: 1;
+	transform: scale(0.96);
+}
+/* pöttyök a képek alatt */
+.pf-swiper .swiper-pagination{
+	position: relative;
+	margin-top: 12px;
+	text-align: center;
+}
+.pf-swiper .swiper-pagination-bullet{
+	width:12px;
+	height:12px;
+	margin:0 6px;
+	background:#aaa;
+	opacity:1;
+	border-radius:50%;
+	transition:transform .25s, background-color .25s;
+}
+.pf-swiper .swiper-pagination-bullet-active{
+	background:#000;
+	transform:scale(1.15);
+}
+/* pagination – 5 dinamikus pötty, középső fekete, a sor mozog */
+.pf-swiper .swiper-pagination{
+	position: relative;
+	margin-top: 12px;
+	text-align: center;
+}
+.pf-swiper .swiper-pagination-bullet{
+	height: 12px;
+	margin: 0 6px;
+	background: #aaa;
+	opacity: 1;
+	border-radius: 50%;
+	transition: transform .25s ease, background-color .25s ease;
+}
+.pf-swiper .swiper-pagination-bullet-active{
+	background: #000;
+	transform: scale(1.15);
+}
+/* Pagination pöttyök */
+.pf-swiper .swiper-pagination {
+	position: relative;
+	margin-top: 16px;
+	text-align: center;
+}
+.pf-swiper .swiper-pagination-bullet {
+	width: 12px;
+	height: 12px;
+	margin: 0 6px;
+	background: #aaa;
+	opacity: 1;
+	border-radius: 50%;
+	transition: transform 0.25s ease, background-color 0.25s ease;
+}
+.pf-swiper .swiper-pagination-bullet-active {
+	background: #000;
+	transform: scale(1.2);
+	/* kis nagyítás animáció húzáskor */
+}
+/* Portfolio pagination – kényszerített láthatóság */
+.pf-swiper .swiper-pagination{
+	position: relative !important;
+	/* ne legyen bottom:0 rejtve */
+	display: block !important;
+	visibility: visible !important;
+	margin-top: 16px;
+	text-align: center;
+	z-index: 5;
+	/* kép fölé */
+}
+.pf-swiper {
+	overflow: visible;
+}
+/* nehogy levágja a container */
+.pf-swiper .swiper-pagination-bullet{
+	width: 12px;
+	height: 12px;
+	margin: 0 6px;
+	background: #aaa;
+	opacity: 1;
+	border-radius: 50%;
+	transition: transform .25s ease, background-color .25s ease;
+}
+.pf-swiper .swiper-pagination-bullet-active{
+	background: #000;
+	transform: scale(1.2);
+}
+/* === Top bar shrink + halványodás (végső, felülíró verzió) === */
+:root{
+	--topbar-h: 120px;
+	--topbar-h-small: 90px;
+}
+/* Alap fejléc */
+.top-bar{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: var(--topbar-h);
+	background-color: #E6DED6;
+	/* bézses */
+	z-index: 3000;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	transition: height .28s ease, background-color .28s ease, box-shadow .28s ease;
+}
+/* Összemegy + picit áttetsző + finom árnyék */
+.top-bar[data-shrink="1"]{
+	height: var(--topbar-h-small);
+	background-color: rgba(230,222,214,0.92);
+	box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+/* Logó együtt megy össze a fejléccel */
+.top-bar .header-logo{
+	height: calc(var(--topbar-h) - 20px);
+	object-fit: contain;
+	transition: height .28s ease;
+}
+.top-bar[data-shrink="1"] .header-logo{
+	height: calc(var(--topbar-h-small) - 20px);
+}
+/* A fix header miatt ne csússzon a tartalom alá */
+body{
+	padding-top: var(--topbar-h);
+}
+/* === FIX: Top bar shrink + halványodás, kompatibilis mindkét módszerrel === */
+:root{
+	--topbar-h: 120px;
+	--topbar-h-small: 90px;
+}
+/* Ha a JS .scrolled-et tesz rá VAGY data-shrink="1"-et állít,mindkettőre ugyanazt az állapotot alkalmazzuk */
+.top-bar.scrolled,.top-bar[data-shrink="1"]{
+	height: var(--topbar-h-small) !important;
+	background-color: rgba(230,222,214,0.92) !important;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+	transition: height .28s ease, background-color .28s ease, box-shadow .28s ease;
+}
+/* A logó is zsugorodjon mindkét esetben */
+.top-bar.scrolled .header-logo,.top-bar[data-shrink="1"] .header-logo{
+	height: calc(var(--topbar-h-small) - 20px) !important;
+	transition: height .28s ease;
+}
+/* Biztonság kedvéért a body paddingje a nagy állapothoz igazodik */
+body{
+	padding-top: var(--topbar-h) !important;
+}
+/* === FIX: Portfolio slider – teljes szélesség + pöttyök mindig látszanak === */
+/* Üsd ki a globális .swiper {
+	max-width:600px
+}
+hatását CSAK a portfólión */
+.portfolio .swiper{
+	width: 100% !important;
+	max-width: none !important;
+	margin: 0 !important;
+	overflow: visible;
+	/* hogy a pagination ne vágódjon le */
+	padding-bottom: 20px;
+	/* hely a pöttyöknek */
+}
+/* A pagination biztosan a képek alatt és látható legyen */
+.portfolio .swiper .swiper-pagination{
+	position: relative !important;
+	display: block !important;
+	visibility: visible !important;
+	margin-top: 12px !important;
+	text-align: center !important;
+	z-index: 5;
+}
+/* Elegáns pöttyök + aktív animáció */
+.portfolio .swiper-pagination-bullet{
+	width: 12px;
+	height: 12px;
+	margin: 0 6px;
+	background: #aaa;
+	opacity: 1;
+	border-radius: 50%;
+	transition: transform .25s ease, background-color .25s ease;
+}
+.portfolio .swiper-pagination-bullet-active{
+	background: #000;
+	transform: scale(1.15);
+}
+/* --- HEADER SHRINK: mind .scrolled, mind [data-shrink] esetén működjön --- */
+.top-bar.scrolled,.top-bar[data-shrink="1"]{
+	height: var(--topbar-h-small) !important;
+	background-color: rgba(230,222,214,0.92) !important;
+	box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+	transition: height .28s ease, background-color .28s ease, box-shadow .28s ease;
+}
+.top-bar.scrolled .header-logo,.top-bar[data-shrink="1"] .header-logo{
+	height: calc(var(--topbar-h-small) - 20px) !important;
+	transition: height .28s ease;
+}
+/* --- PORTFÓLIÓ PÖTTYÖK látszódjanak és a slider ne szűküljön be --- */
+.portfolio .swiper{
+	width: 100% !important;
+	max-width: none !important;
+	/* kiüti a régi 600px-es korlátot */
+	margin: 0 !important;
+	overflow: visible;
+	/* pöttyöknek hely */
+	padding-bottom: 20px;
+}
+.portfolio .swiper .swiper-pagination{
+	position: relative !important;
+	display: block !important;
+	visibility: visible !important;
+	margin-top: 12px !important;
+	text-align: center !important;
+	z-index: 5;
+}
+.portfolio .swiper-pagination-bullet{
+	width: 12px;
+	height: 12px;
+	margin: 0 6px;
+	background: #aaa;
+	opacity: 1;
+	border-radius: 50%;
+	transition: transform .25s ease, background-color .25s ease;
+}
+.portfolio .swiper-pagination-bullet-active{
+	background: #000;
+	transform: scale(1.15);
+}
+/* ===== Custom 5-dot pagination a portfólióhoz ===== */
+.pf-dots{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+	margin-top: 16px;
+}
+.pf-dot{
+	width: 12px;
+	height: 12px;
+	border: 0;
+	border-radius: 50%;
+	background: #aaa;
+	cursor: pointer;
+	transition: transform .2s ease, background-color .2s ease, opacity .2s ease;
+	opacity: 1;
+}
+.pf-dot.is-active{
+	background: #000;
+	transform: scale(1.2);
+}
+/* ===== Custom dots: tükrözik a képek hatását ===== */
+.pf-dots{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+	margin-top: 16px;
+	overflow: hidden;
+}
+.pf-dot{
+	width: 12px;
+	height: 12px;
+	border: 0;
+	border-radius: 50%;
+	background: #aaa;
+	opacity: 0.2;
+	cursor: pointer;
+	transition: transform .3s ease, background-color .3s ease, opacity .3s ease;
+}
+.pf-dot.near-2 {
+	opacity: 0.4;
+	transform: scale(0.9);
+}
+.pf-dot.near-1 {
+	opacity: 0.6;
+	transform: scale(1.0);
+}
+.pf-dot.active {
+	opacity: 1;
+	background: #000;
+	transform: scale(1.3);
+}
+/* ===== Dots slider ===== */
+.pf-dots-wrapper{
+	overflow: hidden;
+	width: 80px;
+	/* 5 pötty helye (5 * 12px + gap) */
+	margin: 16px auto 0;
+}
+.pf-dots{
+	display: flex;
+	gap: 12px;
+	transition: transform 0.35s ease;
+}
+.pf-dot{
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: #aaa;
+	opacity: 0.4;
+	transition: transform .3s ease, background-color .3s ease, opacity .3s ease;
+}
+.pf-dot.active{
+	background: #000;
+	opacity: 1;
+	transform: scale(1.3);
+}
+/* ===== 5-darabos animált „pötty-sáv” a portfólió alá ===== */
+.pf-dots-wrapper{
+	width: calc(12px*5 + 12px*4);
+	/* 5 pötty + 4 rés = 108px */
+	margin: 16px auto 0;
+	overflow: hidden;
+	/* csak 5 látszik */
+}
+.pf-dots-track{
+	display: flex;
+	gap: 12px;
+	will-change: transform;
+	transition: transform 0.35s ease;
+	/* animáció a csúszáskor */
+}
+.pf-dot{
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: #aaa;
+	opacity: .2;
+	transform: scale(.9);
+	transition: transform .25s ease, background-color .25s ease, opacity .25s ease;
+	cursor: pointer;
+}
+/* a „5-ös ablakon” belüli árnyalás – mint a képeknél */
+.pf-dot.near-2 {
+	opacity: .4;
+	transform: scale(.95);
+}
+.pf-dot.near-1 {
+	opacity: .6;
+	transform: scale(1.0);
+}
+/* mindig a KÖZÉPSŐ legyen fekete és picit nagyobb */
+.pf-dot.active {
+	background: #000;
+	opacity: 1;
+	transform: scale(1.25);
+}
+.pf-dots-wrapper {
+	position: relative;
+	overflow: hidden;
+	width: 120px;
+	/* egyszerre 5 pötty látszik */
+	margin: 12px auto 0;
+}
+.pf-dots-track {
+	display: flex;
+	gap: 8px;
+	transition: transform 0.35s ease;
+}
+.pf-dot {
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: #aaa;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.25s ease, transform 0.25s ease;
+}
+.pf-dot.active {
+	background: #000;
+	transform: scale(1.2);
+}
+/* Portfolio gomb */
+.portfolio-button {
+	margin-top: 2rem;
+	text-align: center;
+}
+.more-button {
+	background-color: #000;
+	color: #fff;
+	padding: .75rem 2rem;
+	font-size: 1rem;
+	border: none;
+	border-radius: 30px;
+	cursor: pointer;
+	text-decoration: none;
+	font-family: 'Work Sans', sans-serif;
+	letter-spacing: .5px;
+	transition: all .3s ease;
+	display: inline-block;
+}
+.more-button:hover {
+	background-color: #333;
+	transform: scale(1.05);
+	box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.error-message {
+	color: red;
+	font-size: 0.9rem;
+	margin-top: 4px;
+	display: block;
+}
+/* ===== Projects grid (kártyák) – TISZTA VERZIÓ ===== */
+.projects-grid{
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 700px){
+  .projects-grid{ grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1100px){
+  .projects-grid{ grid-template-columns: 1fr 1fr 1fr; }
+}
+
+.project-card{
+  background:#E6DED6;               /* brand */
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(0,0,0,.08);
+  border: 1px solid rgba(0,0,0,.06);
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+}
+.project-card:hover,
+.project-card:focus{
+  transform: translateY(-6px);
+  box-shadow: 0 12px 36px rgba(0,0,0,.12);
+}
+
+.project-thumb img{
+  width: 100%;
+  height: 300px;                    /* egységes kártyaborító */
+  object-fit: cover;
+  display: block;
+}
+
+.project-info{
+  flex: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.project-info h3{
+  margin: 0 0 .8rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.project-teaser{
+  margin: 0 0 1.2rem 0;
+  color: #555;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.project-card .more-button{
+  align-self: flex-start;
+  background-color: #000;
+  color: #E6DED6;
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-family: 'Work Sans', sans-serif;
+  letter-spacing: .5px;
+  border: none;
+  cursor: pointer;
+}
+.project-card .more-button:hover{
+  background-color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.15);
+}
+
+/* A Projects szekciót széltől-szélig terítjük, de adunk oldalsó belső margót */
+.projects.section-inner{
+  max-width: none !important;
+  width: 100vw !important;
+  margin: 0 !important;
+  padding: 3rem 0 !important;
+  transform: translateX(calc(50vw - 50%));
+}
+.projects .projects-grid{
+  width: 100%;
+  padding: 0 50px;                  /* oldalsó „lélegzés” */
+}
+@media (max-width: 640px){
+  .projects .projects-grid{ padding: 0 16px; }
+}
+
+/* ===== Modal / Lightbox – TISZTA VERZIÓ ===== */
+.project-modal[hidden]{ display: none !important; }
+.project-modal[aria-hidden="false"]{ display: block; }
+
+.project-modal{
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+}
+
+.pm-backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(2px);
+}
+
+.pm-dialog{
+  position: relative;
+  z-index: 1;
+  width: min(1100px, 92vw);
+  max-height: 90vh;
+  margin: 5vh auto 0;
+  background: #E6DED6;              /* brand */
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 40px rgba(0,0,0,.25);
+}
+
+.pm-close{
+display: none !important;	
+}
+
+/* --- Galéria: kép teljes boxszélesség + nyilak a képen --- */
+.pm-body{ padding: 0 1.25rem 1.25rem; }
+
+.pm-gallery{
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 1rem 0 0;
+}
+
+.pm-stage{
+  width: 100%;
+  max-height: min(70vh, 720px);     /* a korábbi „max magasság” megmarad */
+  height: clamp(620px, 48vh, 720px);
+  background: #E6DED6;
+  overflow: hidden;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* A kép mindig kitölti a rendelkezésre álló teret (arányt tartva, vágással) */
+#pm-image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;                /* TELJES box kitöltés */
+  display: block;
+}
+
+/* Nyilak: a képen, középen, elegáns háttérrel */
+.pm-nav{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,.35);
+  color: #fff;
+  font-size: 22px;
+  line-height: 44px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+  z-index: 2;
+}
+.pm-nav:hover{
+  background: rgba(0,0,0,.6);
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 6px 16px rgba(0,0,0,.15);
+}
+.pm-prev{ left: 12px; }
+.pm-next{ right: 12px; }
+
+/* Cím és leírás a kép alatt, balra igazítva (ahogy kérted) */
+.pm-meta{
+  text-align: left;
+  padding: 12px 0 0;
+}
+.pm-meta #pm-title{
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 10px 0 6px;
+}
+.pm-meta .pm-desc{
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  margin: 0;
+}
+
+/* Dots/pagination a kép alatt */
+.pm-dots{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+.pm-dot{
+ display: none !important;
+}
+
+
+/* Kis kijelzőn legyen kisebb oldalpadd a gridben és kisebb modal-margó */
+@media (max-width: 640px){
+  .pm-dialog{ width: 94vw; margin-top: 4vh; }
+  .pm-stage{ height: clamp(260px, 42vh, 520px); }
+}
+
+#pm-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  opacity: 1;
+}
+
+#pm-image.out-left {
+  transform: translateX(-40px);
+  opacity: 0;
+}
+#pm-image.out-right {
+  transform: translateX(40px);
+  opacity: 0;
+}
+#pm-image.in-left {
+  transform: translateX(-40px);
+  opacity: 0;
+  animation: slideInLeft 0.4s forwards;
+}
+#pm-image.in-right {
+  transform: translateX(40px);
+  opacity: 0;
+  animation: slideInRight 0.4s forwards;
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-40px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+@keyframes slideInRight {
+  from { transform: translateX(40px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+.cta-buttons {
+  margin-top: 1.5rem;
+  text-align: left; /* vagy left, ha balra szeretnéd igazítani */
+}
+
+.cta-button-row .more-button {
+  display: inline-block;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: left;
+  margin-top: 1.5rem;
+}
+
+.cta-buttons .submit-button {
+  background-color: #000;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background-color .3s, transform .2s;
+}
+
+.cta-buttons .submit-button:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+}
+
+.cta-buttons .messenger-btn {
+  background-color: #0084FF; /* Messenger kék */
+}
+
+.cta-buttons .messenger-btn:hover {
+  background-color: #006edc;
+}

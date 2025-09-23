@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SideNav from '../components/SideNav.astro';
+---
+
+<BaseLayout title="Home Staging – La Aura Interiors">
+  <Header />
+  <SideNav />
+  <a class="back-home-button" href="/">Back to Home</a>
+
+  <section class="hero">
+    <div class="hero-content" id="hero">
+      <img src="/img/logo.jpg" alt="La Aura Interiors Logo" class="hero-logo" />
+      <h1>Home Staging</h1>
+      <p>Home staging that sells—or simply stuns.</p>
+    </div>
+  </section>
+
+<section class="section-inner text-image-container" id="home-staging">
+  <!-- TEXT -->
+  <div class="service-block">
+    <h1>Home Staging & Styling for Faster, Higher-Value Sales</h1>
+
+    <p class="intro">
+      Professional <strong>home staging</strong> and <strong>interior styling</strong> tailored to help your
+      property stand out in <strong>real-estate listings</strong>, <strong>open houses</strong>, and
+      <strong>high-end rentals</strong>. I create fresh, harmonious spaces that photograph beautifully and make an
+      immediate impact during viewings.
+    </p>
+
+    <h2>What You Get</h2>
+    <ul>
+      <li><strong>Mood &amp; color direction</strong> to build a cohesive, elegant atmosphere</li>
+      <li><strong>Space optimization</strong> that improves flow and functionality room by room</li>
+      <li><strong>Styling &amp; furnishing guidance</strong> using your existing pieces or curated new additions</li>
+      <li><strong>Optional 3D visuals</strong> to preview layouts and design updates before implementation</li>
+    </ul>
+
+    <h2>Perfect For</h2>
+    <ul>
+      <li>Homes prepared for <strong>sale</strong> or <strong>open house</strong> events</li>
+      <li><strong>Luxury / short-term rentals</strong> aiming to attract premium guests</li>
+      <li>Quick yet <strong>high-impact refreshes</strong> that lift the whole home</li>
+    </ul>
+
+    <h2>Why It Works</h2>
+    <p>
+      Thoughtful staging highlights a property’s best features, creates emotional connection, and leads to
+      <strong>stronger photography</strong>, <strong>more inquiries</strong>, and often a
+      <strong>faster, higher-value sale</strong>.
+    </p>
+
+    <p class="cta">
+      📩 Ready to elevate your listing?
+    </p>
+    <div class="cta-buttons">
+      <a href="/#contact" class="more-button">Contact us</a>
+      <a class="more-button" id="btn-messenger" href="https://m.me/61577900795092" target="_blank" rel="noopener">Message us on Messenger</a>
+    </div>
+  </div>
+
+  <!-- IMAGE -->
+  <div class="about-images">
+    <img
+      src="/img/consultation.jpg"
+      alt="Home staging and interior styling moodboard by La Aura Interiors"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+</section>
+
+
+  <Footer />
+</BaseLayout>

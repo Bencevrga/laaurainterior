@@ -1,0 +1,27 @@
+---
+/** Képek: /public/img/1.jpg ... /public/img/30.jpg */
+const images = Array.from({ length: 30 }, (_, i) => `/img/${i + 1}.jpg`);
+---
+<section id="portfolio" class="pf fullwidth">
+  <h2>Projects</h2>
+
+  <div class="swiper pf-swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-pagination"></div>
+      {images.map((src, i) => (
+        <div class="swiper-slide" aria-label={`Kép ${i + 1} / ${images.length}`}>
+          <img src={src} alt={`Portfolio ${i + 1}`} loading="lazy" />
+        </div>
+      ))}
+    </div>
+
+    <div class="swiper-pagination"></div>
+  </div>
+  <div class="portfolio-button">
+    <a class="more-button" href="/Projects">More projects…</a>
+  </div>
+
+  <!-- Lazy init (csak ezen az oldalon, csak ha látszik) -->
+  <script type="module" src="/src/scripts/lazy-swiper.js"></script>
+</section>
+<div class="section-divider"></div>

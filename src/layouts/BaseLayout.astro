@@ -1,0 +1,31 @@
+---
+import '../styles/style.css';
+const { title = 'La Aura Interiors' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Work+Sans:wght@300;400&display=swap" rel="stylesheet" />
+
+    <!-- Swiper CSS (csak egyszer) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  </head>
+  <body id="top">
+    <!-- Globális hamburger: MINDEN oldalon, mindig ugyanott -->
+    <span id="global-menu-icon" class="menu-icon" aria-label="Open menu">☰</span>
+
+    <!-- Oldal tartalma: PONT EGY slot -->
+    <slot />
+
+    <!-- Egy init modul indít el mindent (nav, topbar, accordion, swiper, contact) -->
+    <script type="module" src="/src/scripts/init.js"></script>
+    <script type="module" src="/src/scripts/header-shrink.js"></script>
+    <script type="module" src="/src/scripts/lazy-swiper.js"></script>
+    <script type="module" src="/src/scripts/nav.js"></script>
+  </body>
+</html>

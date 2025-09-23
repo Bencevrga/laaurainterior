@@ -1,0 +1,76 @@
+---
+import SideNav from '../components/SideNav.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="3D Visualization – La Aura Interiors">
+  <Header />
+  <SideNav />
+  <a class="back-home-button" href="/">Back to Home</a>
+
+  <section class="hero">
+    <div class="hero-content" id="hero">
+      <img src="/img/logo.jpg" alt="La Aura Interiors Logo" class="hero-logo" />
+      <h1>3D Visualization</h1>
+      <p>See your space before it’s built with high-end, photorealistic 3D visuals.</p>
+    </div>
+  </section>
+
+ <section class="section-inner text-image-container" id="visualization">
+  <!-- TEXT -->
+  <div class="service-block">
+    <h1>3D Visualization & Rendering</h1>
+
+    <p class="intro">
+      Bring your ideas to life with <strong>high-quality 3D visualizations</strong>. Whether you’re planning a full renovation,
+      redesigning a single room, or presenting a project to clients, photo-realistic renders help you
+      <strong>see the final result before implementation</strong>.
+    </p>
+
+    <h2>What’s Included</h2>
+    <ul>
+      <li><strong>3D floor plans</strong> for accurate spatial understanding</li>
+      <li><strong>Photo-realistic renders</strong> that showcase lighting, textures, and materials</li>
+      <li><strong>Multiple angles & perspectives</strong> for a complete overview</li>
+      <li><strong>Virtual walkthroughs</strong> for an immersive design experience</li>
+      <li><strong>Custom design adjustments</strong> to explore different styles and layouts</li>
+    </ul>
+
+    <h2>Perfect For</h2>
+    <ul>
+      <li>Homeowners planning a <strong>major renovation or redesign</strong></li>
+      <li>Real estate professionals showcasing <strong>pre-sale concepts</strong></li>
+      <li>Clients unsure between multiple <strong>design options</strong></li>
+    </ul>
+
+    <h2>Why Choose 3D Visualization</h2>
+    <p>
+      Visualization reduces uncertainty and helps you make confident decisions by previewing
+      <strong>materials, colors, and layouts</strong> in a realistic environment. It saves time, avoids costly mistakes,
+      and ensures your <strong>vision is perfectly translated into reality</strong>.
+    </p>
+
+    <p class="cta">
+      📩 Want to see your dream space come alive?
+    </p>
+    <div class="cta-buttons">
+      <a href="/#contact" class="more-button">Contact us</a>
+      <a class="more-button" id="btn-messenger" href="https://m.me/61577900795092" target="_blank" rel="noopener">Message us on Messenger</a>
+    </div>
+  </div>
+
+  <!-- IMAGE -->
+  <div class="about-images">
+    <img
+      src="/img/consultation.jpg"
+      alt="3D interior visualization of a modern living room"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+</section>
+
+  <Footer />
+</BaseLayout>
