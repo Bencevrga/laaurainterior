@@ -1,4 +1,5 @@
 ---
+import messengerUrl from '../scripts/messenger-deeplink.js?url';
 import SideNav from '../components/SideNav.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
@@ -70,6 +71,6 @@ import Footer from '../components/Footer.astro';
     />
   </div>
 </section>
-
+<script type="module" src={messengerUrl}></script>
   <Footer />
 </BaseLayout>

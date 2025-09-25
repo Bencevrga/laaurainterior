@@ -1,5 +1,5 @@
 ---
-import { initAccordion } from '../scripts/services-accordion.js';
+import accordionUrl from '../scripts/accordion.js?url';
 ---
 
 <section class="services" id="services">
@@ -64,9 +64,6 @@ import { initAccordion } from '../scripts/services-accordion.js';
   </div>
 
   <!-- az accordion JS csak ezen a komponensen töltődik -->
-   <script type="module">
-      import { initAccordion } from '/src/scripts/services-accordion.js';
-      initAccordion();
-    </script>
+<script type="module" src={accordionUrl}></script>
 </section>
 <div class="section-divider"></div>

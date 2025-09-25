@@ -1,5 +1,8 @@
 ---
 import '../styles/style.css';
+import navUrl from '../scripts/nav.js?url';
+import mainUrl from '../scripts/init.js?url';
+import headerUrl from '../scripts/header-shrink.js?url';
 const { title = 'La Aura Interiors' } = Astro.props;
 ---
 <!DOCTYPE html>
@@ -16,6 +19,7 @@ const { title = 'La Aura Interiors' } = Astro.props;
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   </head>
   <body id="top">
+    
     <!-- Globális hamburger: MINDEN oldalon, mindig ugyanott -->
     <span id="global-menu-icon" class="menu-icon" aria-label="Open menu">☰</span>
 
@@ -23,9 +27,9 @@ const { title = 'La Aura Interiors' } = Astro.props;
     <slot />
 
     <!-- Egy init modul indít el mindent (nav, topbar, accordion, swiper, contact) -->
-    <script type="module" src="/src/scripts/init.js"></script>
-    <script type="module" src="/src/scripts/header-shrink.js"></script>
+    <script type="module" src={mainUrl}></script>
+    <script type="module" src={headerUrl}></script>
     <script type="module" src="/src/scripts/lazy-swiper.js"></script>
-    <script type="module" src="/src/scripts/nav.js"></script>
+    <script type="module" src={navUrl}></script>
   </body>
 </html>

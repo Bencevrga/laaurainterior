@@ -1,5 +1,26 @@
-// projects.js – modal + galéria (animáció + swipe/drag + auto-play)
+// src/scripts/projects.js
+
+// --- BASE path a GitHub Pages-hez (pl. "/laaurainterior/")
+function getBase() {
+  const b = (import.meta?.env?.BASE_URL ?? '/');
+  return b.endsWith('/') ? b : (b + '/');
+}
+function isAbs(u) { return /^https?:\/\//i.test(u) || u.startsWith('data:'); }
+function normalizeUrl(u) {
+  if (!u) return u;
+  const BASE = getBase();
+  if (isAbs(u)) return u;
+  // ha már BASE-szel kezdődik, hagyjuk
+  if (u.startsWith(BASE)) return u;
+  // ha leading slash-sel jön ("/img/1.jpg") → BASE + vágott
+  if (u.startsWith('/')) return BASE + u.replace(/^\/+/, '');
+  // relatív ("img/1.jpg") → BASE + u
+  return BASE + u;
+}
+
 export default function initProjects() {
+  if (typeof window === 'undefined' || typeof document === 'undefined') return;
+
   const grid  = document.querySelector('.projects-grid');
   const modal = document.getElementById('project-modal');
   if (!grid || !modal || modal.dataset.inited === '1') return;
@@ -37,7 +58,7 @@ export default function initProjects() {
 
   // --- Render ---
   function renderImage(dir = 0) {
-    if (!current.images.length) return;
+    if (!current.images.length || !imgEl) return;
     const nextSrc = current.images[current.index];
     const nextAlt = `${current.title} – ${current.index + 1}/${current.images.length}`;
 
@@ -90,28 +111,30 @@ export default function initProjects() {
 
   // --- Modal open/close ---
   function openModalFromCard(card) {
-    const images = JSON.parse(card.dataset.images || '[]');
+    // data-images lehet JSON tömb: ["img/1.jpg", "/img/2.jpg", "https://..."]
+    const raw = JSON.parse(card.dataset.images || '[]');
+    const images = raw.map(normalizeUrl).filter(Boolean);
     const title  = card.dataset.title || 'Project';
     const long   = card.dataset.long  || '';
     if (!images.length) return;
 
     current = { title, long, images, index: 0 };
-    titleEl.textContent = title;
-    descEl.textContent  = long;
+    if (titleEl) titleEl.textContent = title;
+    if (descEl)  descEl.textContent  = long;
 
     modal.hidden = false;
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
 
     renderImage(0);
-    startAuto(); // autoplay indulás mindig
+    startAuto();
   }
 
   function closeModal() {
     modal.hidden = true;
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    imgEl.src = '';
+    if (imgEl) imgEl.src = '';
     if (dotsEl) dotsEl.innerHTML = '';
     stopAuto();
     if (resumeTimer) clearTimeout(resumeTimer);
@@ -135,7 +158,7 @@ export default function initProjects() {
   });
 
   modal.addEventListener('click', (e) => {
-    if (e.target.dataset.close === '1' || e.target.classList.contains('pm-close')) {
+    if (e.target.dataset?.close === '1' || e.target.classList?.contains('pm-close')) {
       closeModal();
     }
   });
@@ -150,32 +173,43 @@ export default function initProjects() {
     if (e.key === 'ArrowLeft')  { prev(); pauseAndScheduleResume(); }
   });
 
-  // Swipe/drag
-  let isDown = false, startX = 0, dx = 0;
-  stage.addEventListener('pointerdown', (e) => {
-    if (animating) return;
-    isDown = true; startX = e.clientX; dx = 0;
-    stage.setPointerCapture(e.pointerId);
-    pauseAndScheduleResume();
-  });
-  stage.addEventListener('pointermove', (e) => {
-    if (!isDown || animating) return;
-    dx = e.clientX - startX;
-    imgEl.style.transform = `translateX(${dx}px)`;
-    imgEl.style.opacity = String(Math.max(0.5, 1 - Math.abs(dx)/300));
-  });
-  function endPointer(e) {
-    if (!isDown) return; isDown = false;
-    try { stage.releasePointerCapture(e.pointerId); } catch {}
-    const TH = 60;
-    if (dx < -TH) next();
-    else if (dx > TH) prev();
-    imgEl.style.transition = 'transform .25s, opacity .25s';
-    imgEl.style.transform = ''; imgEl.style.opacity = '1';
-    setTimeout(()=> imgEl.style.transition='', 300);
-  }
-  stage.addEventListener('pointerup', endPointer);
-  stage.addEventListener('pointercancel', endPointer);
+  // Swipe/drag – csak ha van stage és img
+  if (stage && imgEl) {
+    let isDown = false, startX = 0, dx = 0;
+    stage.addEventListener('pointerdown', (e) => {
+      if (animating) return;
+      isDown = true; startX = e.clientX; dx = 0;
+      stage.setPointerCapture?.(e.pointerId);
+      pauseAndScheduleResume();
+    });
+    stage.addEventListener('pointermove', (e) => {
+      if (!isDown || animating) return;
+      dx = e.clientX - startX;
+      imgEl.style.transform = `translateX(${dx}px)`;
+      imgEl.style.opacity = String(Math.max(0.5, 1 - Math.abs(dx)/300));
+    });
+    function endPointer(e) {
+      if (!isDown) return; isDown = false;
+      try { stage.releasePointerCapture?.(e.pointerId); } catch {}
+      const TH = 60;
+      if (dx < -TH) next();
+      else if (dx > TH) prev();
+      imgEl.style.transition = 'transform .25s, opacity .25s';
+      imgEl.style.transform = ''; imgEl.style.opacity = '1';
+      setTimeout(()=> imgEl.style.transition='', 300);
+    }
+    stage.addEventListener('pointerup', endPointer);
+    stage.addEventListener('pointercancel', endPointer);
 
-  imgEl.addEventListener('dragstart', e => e.preventDefault());
+    imgEl.addEventListener('dragstart', (e) => e.preventDefault());
+  }
+}
+
+/* 🔹 Öninicializálás csak böngészőben */
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => initProjects(), { once: true });
+  } else {
+    initProjects();
+  }
 }

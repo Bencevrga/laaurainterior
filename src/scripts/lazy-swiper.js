@@ -1,14 +1,13 @@
+// src/scripts/lazy-swiper.js
+
 let booted = false;
 
 /* ---------------------------------------------
    KÉPEK KIEMELÉSE / HALVÁNYÍTÁSA PROGRESS ALAPJÁN
-   - 0: középső → éles
-   - ±1: szomszédok → kevésbé éles
-   - ±2: távolabbiak → még halványabb
 --------------------------------------------- */
 function applyShade(sw) {
   if (!sw || !sw.slides) return;
-  sw.slides.forEach(slide => {
+  sw.slides.forEach((slide) => {
     slide.classList.remove(
       'pf-active','pf-near-1','pf-near-2',
       'active','near-1','near-2',
@@ -40,51 +39,54 @@ async function start() {
   if (!container) return;
   booted = true;
 
-  // Swiper CSS
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
-  document.head.appendChild(link);
+  // Swiper CSS betöltés
+  const cssHref = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
+  if (!document.querySelector(`link[rel="stylesheet"][href="${cssHref}"]`)) {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = cssHref;
+    document.head.appendChild(link);
+  }
 
-  // Swiper modul
-  const { default: Swiper } = await import('https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs');
+  // Swiper modul betöltés (CDN ESM)
+  try {
+    const { default: Swiper } = await import(
+      'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
+    );
 
-  const sw = new Swiper(container, {
-    slidesPerView: 5,
-    centeredSlides: true,
-    spaceBetween: 16,
-    loop: true,                 // lineáris vég-kezelés az 5-ös ablakhoz
-    grabCursor: true,
-    slideToClickedSlide: true,
-    watchSlidesProgress: true,   // <<< KELL a progress alapú árnyaláshoz!
-    speed: 500,                  // simább animáció
-
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false
-    },
-
-    breakpoints: {
-      0:    { slidesPerView: 1, centeredSlides: true, spaceBetween: 12 },
-      600:  { slidesPerView: 3, centeredSlides: true, spaceBetween: 16 },
-      1024: { slidesPerView: 5, centeredSlides: true, spaceBetween: 16 }
-    },
-
-    on: {
-      // első osztály-beállítás
-      init(s){ applyShade(s); },
-      // húzás/animáció közben is frissítjük az élességet
-      setTranslate(s){ applyShade(s); },
-      // animáció végekor is rászinkronizálunk
-      transitionEnd(s){ applyShade(s); },
-      // ablakméret változásnál újraszámolunk
-      resize(s){ s.update(); applyShade(s); }
-    }
-  });
+    const sw = new Swiper(container, {
+      slidesPerView: 5,
+      centeredSlides: true,
+      spaceBetween: 16,
+      loop: true,
+      grabCursor: true,
+      slideToClickedSlide: true,
+      watchSlidesProgress: true, // kell a progress alapú árnyaláshoz
+      speed: 500,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      breakpoints: {
+        0:    { slidesPerView: 1, centeredSlides: true, spaceBetween: 12 },
+        600:  { slidesPerView: 3, centeredSlides: true, spaceBetween: 16 },
+        1024: { slidesPerView: 5, centeredSlides: true, spaceBetween: 16 },
+      },
+      on: {
+        init(s){ applyShade(s); },
+        setTranslate(s){ applyShade(s); },
+        transitionEnd(s){ applyShade(s); },
+        resize(s){ s.update(); applyShade(s); },
+      },
+    });
+  } catch (e) {
+    console.error('Swiper betöltési hiba:', e);
+    booted = false; // engedjük újrapróbálni, ha gond volt
+  }
 }
 
 /* ---------------------------------------------
-   LAZY BOOT: csak ha látszik a slider
+   LAZY BOOT: csak kliensen, ha látszik a slider
 --------------------------------------------- */
 function setupObserver() {
   const target =
@@ -104,8 +106,21 @@ function setupObserver() {
   io.observe(target);
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', setupObserver, { once: true });
-} else {
-  setupObserver();
+/* ---------------------------------------------
+   ÖNINDÍTÁS CSAK BÖNGÉSZŐBEN
+--------------------------------------------- */
+export function initLazySwiper() {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupObserver, { once: true });
+  } else {
+    setupObserver();
+  }
 }
+
+// csak kliensen futtassunk bármit
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  initLazySwiper();
+}
+
+// default export (ha máshonnan hívnád)
+export default initLazySwiper;
