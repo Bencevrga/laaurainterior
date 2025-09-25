@@ -238,7 +238,7 @@ body, p, li, a {
 	height: 100vh;
 	/* teljes viewport */
 	margin-top: calc(-1 * var(--topbar-h));
-	background-image: url('../assets/fejleckep.jpg');
+	background-image: url('../img/fejleckep.jpg');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
