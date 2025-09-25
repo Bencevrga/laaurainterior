@@ -1,5 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  scopedStyleStrategy: 'where', // biztonságosabb CSS kapszulázás
+  site: 'https://bencevrga.github.io/laaurainterior',
+  base: '/laaurainterior/',
+  // trailingSlash: 'ignore' // vagy 'always', csak legyél konzisztens a linkekben
 });

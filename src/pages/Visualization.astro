@@ -8,11 +8,10 @@ import Footer from '../components/Footer.astro';
 <BaseLayout title="3D Visualization – La Aura Interiors">
   <Header />
   <SideNav />
-  <a class="back-home-button" href="/">Back to Home</a>
 
   <section class="hero">
     <div class="hero-content" id="hero">
-      <img src="/img/logo.jpg" alt="La Aura Interiors Logo" class="hero-logo" />
+      <img src={import.meta.env.BASE_URL + 'img/logo.jpg'} alt="La Aura Interiors Logo" class="hero-logo"/>
       <h1>3D Visualization</h1>
       <p>See your space before it’s built with high-end, photorealistic 3D visuals.</p>
     </div>
@@ -64,7 +63,7 @@ import Footer from '../components/Footer.astro';
   <!-- IMAGE -->
   <div class="about-images">
     <img
-      src="/img/consultation.jpg"
+      src={import.meta.env.BASE_URL + 'img/consultation.jpg'}
       alt="3D interior visualization of a modern living room"
       loading="lazy"
       decoding="async"

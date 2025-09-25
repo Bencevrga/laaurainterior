@@ -8,11 +8,10 @@ import SideNav from '../components/SideNav.astro';
 <BaseLayout title="Consultation – La Aura Interiors">
   <Header />
   <SideNav />
-  <a class="back-home-button" href="/">Back to Home</a>
 
   <section class="hero">
     <div class="hero-content" id="hero">
-      <img src="/img/logo.jpg" alt="La Aura Interiors Logo" class="hero-logo" />
+      <img src={import.meta.env.BASE_URL + 'img/logo.jpg'} alt="La Aura Interiors Logo" class="hero-logo"/>
       <h1>Consultation</h1>
       <p>Get personalized design advice crafted just for you.</p>
     </div>
@@ -63,7 +62,7 @@ import SideNav from '../components/SideNav.astro';
   <!-- IMAGE -->
   <div class="about-images">
     <img
-      src="/img/consultation.jpg"
+      src={import.meta.env.BASE_URL + 'img/consultation.jpg'}
       alt="Interior design consultation with moodboard and material samples"
       loading="lazy"
       decoding="async"
