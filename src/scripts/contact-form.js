@@ -1,5 +1,7 @@
+// src/scripts/contact-form.js
+
 export default function initContact() {
-  const form = document.getElementById('contact-form');
+  const form = document.querySelector('#contact-form');
   if (!form) return;
 
   const popup = document.getElementById('popup');
@@ -76,4 +78,13 @@ export default function initContact() {
       popup.setAttribute('aria-hidden', 'true');
     }
   });
+}
+
+/* 🔹 Öninicializálás a böngészőben */
+if (typeof window !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => initContact());
+  } else {
+    initContact();
+  }
 }

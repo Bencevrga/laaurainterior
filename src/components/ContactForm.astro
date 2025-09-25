@@ -1,3 +1,7 @@
+---
+import contactUrl from '../scripts/contact-form.js?url';
+---
+
 <section class="contact" id="contact">
   <div class="section-inner">
     <h2>Contact Us</h2>
@@ -47,8 +51,5 @@
       <button id="popup-ok">OK</button>
     </div>
   </div>
-  <script type="module">
-    import initContact from '/src/scripts/contact-form.js';
-    initContact();
-</script>
+  <script type="module" src={contactUrl}></script>
 </section>
