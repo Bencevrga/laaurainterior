@@ -1,4 +1,4 @@
-// src/scripts/accordion.js
+
 
 export function initAccordion() {
   const items = document.querySelectorAll('.service-item');
