@@ -1,5 +1,6 @@
 ---
 import '../styles/style.css';
+import topbarScrollUrl from '../scripts/topbar-scroll.js?url';
 import navUrl from '../scripts/nav.js?url';
 import mainUrl from '../scripts/init.js?url';
 import headerUrl from '../scripts/header-shrink.js?url';
@@ -28,6 +29,7 @@ const { title = 'La Aura Interiors' } = Astro.props;
 
     <!-- Egy init modul indít el mindent (nav, topbar, accordion, swiper, contact) -->
     <script type="module" src={mainUrl}></script>
+    <script type="module" src={topbarScrollUrl}></script>
     <script type="module" src={headerUrl}></script>
     <script type="module" src="/src/scripts/lazy-swiper.js"></script>
     <script type="module" src={navUrl}></script>

@@ -1,11 +1,11 @@
 <nav class="side-nav" id="sideNav">
   <a href="#" class="close-btn" aria-label="Close menu">×</a>
-  <a href="/#top" class="side-link">Home</a>
-  <a href="/#about" class="side-link">About</a>
-  <a href="/#aboutme" class="side-link">About Me</a>
-  <a href="/#services" class="side-link">Our Services</a>
-  <a href="/#portfolio" class="side-link">Portfolio</a>
-  <a href="/#contact" class="side-link">Contact Us</a>
+  <a href={import.meta.env.BASE_URL}>Home</a>
+  <a href={import.meta.env.BASE_URL + 'about/'} class="side-link">About</a>
+  <a href={import.meta.env.BASE_URL + 'aboutme/'} class="side-link">About Me</a>
+  <a href={import.meta.env.BASE_URL + 'services/'} class="side-link">Services</a>
+  <a href={import.meta.env.BASE_URL + 'portfolio/'} class="side-link">Portfolio</a>
+  <a href={import.meta.env.BASE_URL + 'contact/'} class="side-link">Contact Us</a>
 
   <div class="side-nav-contact">
     <hr class="side-nav-divider" />   

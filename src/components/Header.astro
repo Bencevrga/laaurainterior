@@ -1,18 +1,18 @@
 <header class="top-bar">
   <div class="top-bar-inner">
     <!-- Bal: logó -->
-    <a href="/#top">
+     <a href={import.meta.env.BASE_URL}>
       <img src={import.meta.env.BASE_URL + 'img/logo.jpg'} alt="La Aura Interiors Logo" class="header-logo"/>
     </a>
 
     <!-- Közép: főmenü -->
     <nav class="main-nav" aria-label="Main">
-      <a href="/">Home</a>
-      <a href="/#about">About</a>
-      <a href="/#services">Services</a>
-      <a href="/#feedbacks">Feedback</a>
-      <a href="/#portfolio">Projects</a>
-      <a href="/#contact">Contact</a>
+      <a href={import.meta.env.BASE_URL}>Home</a>
+      <a href={import.meta.env.BASE_URL + '#about'}>About</a>
+      <a href={import.meta.env.BASE_URL + '#services'}>Services</a>
+      <a href={import.meta.env.BASE_URL + '#feedbacks'}>Feedback</a>
+      <a href={import.meta.env.BASE_URL + '#portfolio'}>Projects</a>
+      <a href={import.meta.env.BASE_URL + '#contact'}>Contact</a>
     </nav>
 
     <!-- Jobb: social ikonok -->
