@@ -73,19 +73,19 @@ body, p, li, a {
 }
 /* ===================================================================Header / Top bar (fixed, double height)=================================================================== */
 .top-bar {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 120px;
-	/* alapmagasság */
-	background-color: #E6DED6;
-	/* bézses szín */
-	z-index: var(--z-topbar);
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	transition: height 0.35s ease, background-color 0.35s ease, box-shadow 0.35s ease;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--topbar-h, 120px);
+  background: #E6DED6;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  z-index: 3000;
+  transition: background .25s ease, box-shadow .25s ease, height .25s ease;
+}
+
+/* Side-nav nyitva: topbar árnyék off és áttetszőbb, hogy “összeolvadjanak” */
+html.nav-open .top-bar {
+  background: rgba(230, 222, 214, 0.92);
+  box-shadow: none;
 }
 /* Görgetés után kisebb + áttetszőbb */
 .top-bar.scrolled {
@@ -112,45 +112,40 @@ body, p, li, a {
 /* Globális hamburger – mindig elérhető, felül marad */
 .menu-icon {
 	position: fixed;
-	top: 8px;
+	top: 30px;
 	right: 15px;
-	font-size: 2rem;
+	font-size: 34px;
+	width: 44px; height: 44px;
 	cursor: pointer;
 	z-index: var(--z-menu-icon);
 	visibility: visible;
 	pointer-events: auto;
+	transition: top .25s ease, font-size .25s ease, transform .25s ease;
 }
-/* BACK TO HOME gomb (szolgáltatás oldalak) */
-.back-home-button {
-	background-color: #000;
-	color: #fff;
-	padding: .5rem 1rem;
-	border-radius: 30px;
-	text-decoration: none;
-	font-size: .9rem;
-	transition: background-color .3s;
-	margin-left: auto;
-	margin-right: .5rem;
+/* Görgetés után zsugorodjon a hamburger is */
+body[data-shrink="1"] .menu-icon {
+  top: 25px;
+  font-size: 26px;        /* arányosan kisebb */
+  transform: translateY(0); /* sima, elegáns mozgás */
 }
-.back-home-button:hover {
-	background-color: #333;
-}
+
 /* ===================================================================Side navigation=================================================================== */
 .side-nav {
-	position: fixed;
-	top: 0;
-	right: 0;
-	height: 100%;
-	width: 0;
-	/* alapból zárt */
-	overflow-x: hidden;
-	transition: width .3s;
-	padding-top: var(--topbar-h);
-	/* a topbar alól induljon */
-	z-index: var(--z-side-nav);
-	background: rgba(245,241,237,.8);
-	backdrop-filter: blur(10px);
-	box-shadow: 2px 0 10px rgba(0,0,0,.1);
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: 260px;
+  transform: translateX(100%);
+  transition: transform .22s ease;
+  background-color: rgba(230, 222, 214, 0.92);
+  backdrop-filter: blur(10px);
+  box-shadow: -2px 0 12px rgba(0,0,0,0.08);
+  z-index: 3600;                  /* top-bar fölött */
+  overflow-y: auto;
+  padding-bottom: 24px;           /* kényelmi tér */
+  /* padding-top-ot a JS állítja a topbar magassága alapján */
+}
+.side-nav.is-open {
+  transform: translateX(0);
 }
 .side-nav.active {
 	width: 250px;
@@ -553,6 +548,9 @@ html, body {
 	max-width: 100%;
 	border-radius: 10px;
 	box-shadow: 0 4px 10px rgba(0,0,0,.1);
+	height: 520px;       /* vagy amekkora fix magasságot szeretnél */
+  	object-fit: cover;   /* kitölti a teret, de nem torzítja a képet */
+  	border-radius: 12px; /* opcionális, ha kerekített szélt akarsz */
 }
 .service-block {
 	flex: 2;
@@ -1797,3 +1795,28 @@ display: none !important;
 .cta-buttons .messenger-btn:hover {
   background-color: #006edc;
 }
+
+/* Mobilon rejtjük a felső menüket */
+.top-bar .main-nav,
+.top-bar .social-nav { display: none !important; }
+
+/* Mobilon CSAK a #menuBtn látszódjon */
+#menuBtn {
+  display: block !important;
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  z-index: 4000;
+  cursor: pointer;
+}
+
+/* Ha létezne egy globális ikon, biztosan rejtsük el */
+#global-menu-icon { display: none !important; }
+
+/* Desktopon a menük vissza, hamburger el */
+@media (min-width: 1024px) {
+  .top-bar .main-nav,
+  .top-bar .social-nav { display: flex !important; }
+  #menuBtn { display: none !important; }
+}
+

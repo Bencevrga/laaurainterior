@@ -8,7 +8,7 @@ import SideNav from '../components/SideNav.astro';
 // Ide írd be a projektjeidet (borítókép + képek tömb + rövid/hosszú leírás)
 const projects = [
   {
-    title: 'Minimalist Loft',
+    title: 'Downtown Elegance',
     cover: `${import.meta.env.BASE_URL}img/services/1bor.jpg`,
     images: [
       `${import.meta.env.BASE_URL}img/services/2in.jpg`,
@@ -21,81 +21,104 @@ const projects = [
       `${import.meta.env.BASE_URL}img/services/9in.jpg`,
       `${import.meta.env.BASE_URL}img/services/10in.jpg`,
     ],
-    teaser: 'Letisztult, meleg tónusú nappali természetes anyagokkal.',
-    long: 'Minimalist lines and statement pieces define this loft, balancing functionality with artistic expression. A space designed to inspire and feel effortlessly elegant.'
+    teaser: 'Industrial elegance softened by warm details, designed for stylish urban living.',
+    long: 'Minimalist lines and statement pieces define this loft, balancing functionality with artistic expression.'
+  },
+      {
+    title: 'Hillside Villa',
+    cover: `${import.meta.env.BASE_URL}img/services/6bor.jpg`,
+    images: [
+      `${import.meta.env.BASE_URL}img/services/1f.jpg`,
+      `${import.meta.env.BASE_URL}img/services/2f.jpg`,
+      `${import.meta.env.BASE_URL}img/services/3f.jpg`,
+      `${import.meta.env.BASE_URL}img/services/4f.jpg`,
+      `${import.meta.env.BASE_URL}img/services/5f.jpg`,
+      `${import.meta.env.BASE_URL}img/services/6f.jpg`,
+    ],
+    teaser: 'An intimate retreat where refined design meets timeless comfort.',
+    long: 'Minimalist design enriched with luxurious details transforms this bedroom into a haven of comfort.'
   },
   {
-    title: 'Nyíregyháza – Fürdőszoba',
-    cover: `${import.meta.env.BASE_URL}img/services/1bor.jpg`,
+    title: 'Lakeview Villa',
+    cover: `${import.meta.env.BASE_URL}img/services/3bor.jpg`,
     images: [
-      `${import.meta.env.BASE_URL}img/1.jpg`,
-      `${import.meta.env.BASE_URL}img/2.jpg`,
-      `${import.meta.env.BASE_URL}img/3.jpg`,
-      `${import.meta.env.BASE_URL}img/4.jpg`,
+      `${import.meta.env.BASE_URL}img/services/1c.jpg`,
+      `${import.meta.env.BASE_URL}img/services/2c.jpg`,
+      `${import.meta.env.BASE_URL}img/services/3c.jpg`,
+      `${import.meta.env.BASE_URL}img/services/4c.jpg`,
+      `${import.meta.env.BASE_URL}img/services/5c.jpg`,
+      `${import.meta.env.BASE_URL}img/services/6c.jpg`,
+      `${import.meta.env.BASE_URL}img/services/7c.jpg`,
+      `${import.meta.env.BASE_URL}img/services/8c.jpg`,
+      `${import.meta.env.BASE_URL}img/services/9c.jpg`,
+      `${import.meta.env.BASE_URL}img/services/10c.jpg`,
+      `${import.meta.env.BASE_URL}img/services/11c.jpg`,
     ],
-    teaser: 'Modern, elegáns fürdő márványhatású burkolatokkal.',
-    long: 'Kompakt, mégis tágas hatású fürdő kialakítása rejtett tárolókkal, meleg LED-világítással és minőségi szerelvényekkel.'
+    teaser: 'A seamless fusion of intimacy and luxury, crafted for ultimate relaxation.',
+    long: 'From the marble-inspired bathroom to the warm, wood-accented bedroom, every detail reflects refined modern living.'
   },
   {
-    title: 'Szentendre – Konyha',
-    cover: `${import.meta.env.BASE_URL}img/services/1bor.jpg`,
+    title: 'Private Wellness Suite',
+    cover: `${import.meta.env.BASE_URL}img/services/4bor.jpg`,
     images: [
-      `${import.meta.env.BASE_URL}img/1.jpg`,
-      `${import.meta.env.BASE_URL}img/2.jpg`,
-      `${import.meta.env.BASE_URL}img/3.jpg`,
-      `${import.meta.env.BASE_URL}img/4.jpg`,
+      `${import.meta.env.BASE_URL}img/services/1d.jpg`,
+      `${import.meta.env.BASE_URL}img/services/2d.jpg`,
+      `${import.meta.env.BASE_URL}img/services/3d.jpg`,
+      `${import.meta.env.BASE_URL}img/services/4d.jpg`,
+      `${import.meta.env.BASE_URL}img/services/5d.jpg`,
+      `${import.meta.env.BASE_URL}img/services/6d.jpg`,
+      `${import.meta.env.BASE_URL}img/services/7d.jpg`,
+      `${import.meta.env.BASE_URL}img/services/8d.jpg`,
+      `${import.meta.env.BASE_URL}img/services/9d.jpg`,
+      `${import.meta.env.BASE_URL}img/services/10d.jpg`,
     ],
-    teaser: 'Funkcionális konyha natúr fával és fekete részletekkel.',
-    long: 'Praktikum és esztétika egyensúlya: nagy munkafelület, jól szervezett tárolók, egységes anyaghasználat és finom kontrasztok.'
+    teaser: 'A spa-inspired bathroom that blends modern design with natural serenity.',
+    long: 'A sanctuary of relaxation where natural textures and cascading greenery meet modern luxury. '
   },
     {
-    title: 'Budapest – Nappali',
-    cover: `${import.meta.env.BASE_URL}img/services/1bor.jpg`,
+    title: 'Timeless Family Residence',
+    cover: `${import.meta.env.BASE_URL}img/services/2bor.jpg`,
     images: [
-      `${import.meta.env.BASE_URL}img/1.jpg`,
-      `${import.meta.env.BASE_URL}img/2.jpg`,
-      `${import.meta.env.BASE_URL}img/3.jpg`,
-      `${import.meta.env.BASE_URL}img/4.jpg`,
+      `${import.meta.env.BASE_URL}img/services/1b.jpg`,
+      `${import.meta.env.BASE_URL}img/services/2b.jpg`,
+      `${import.meta.env.BASE_URL}img/services/3b.jpg`,
+      `${import.meta.env.BASE_URL}img/services/4b.jpg`,
+      `${import.meta.env.BASE_URL}img/services/5b.jpg`,
+      `${import.meta.env.BASE_URL}img/services/6b.jpg`,
+      `${import.meta.env.BASE_URL}img/services/7b.jpg`,
+      `${import.meta.env.BASE_URL}img/services/8b.jpg`,
+      `${import.meta.env.BASE_URL}img/services/9b.jpg`,
+      `${import.meta.env.BASE_URL}img/services/10b.jpg`,
+      `${import.meta.env.BASE_URL}img/services/11b.jpg`,
     ],
-    teaser: 'Letisztult, meleg tónusú nappali természetes anyagokkal.',
-    long: 'Teljes nappali átalakítás: új bútorozás, világítás és textíliák. A cél egy időtlen, meleg és barátságos tér volt, amely jól illeszkedik a budapesti polgári lakás karakteréhez.'
+    teaser: 'A timeless home where comfort and elegance meet every detail.',
+    long: 'This home balances minimalism and warmth, where clean lines and soft textures create harmony.'
   },
     {
-    title: 'Budapest – Nappali',
-    cover: `${import.meta.env.BASE_URL}img/services/1bor.jpg`,
+    title: 'Nature Retreat Bathroom',
+    cover: `${import.meta.env.BASE_URL}img/services/5bor.jpg`,
     images: [
-      `${import.meta.env.BASE_URL}img/1.jpg`,
-      `${import.meta.env.BASE_URL}img/2.jpg`,
-      `${import.meta.env.BASE_URL}img/3.jpg`,
-      `${import.meta.env.BASE_URL}img/4.jpg`,
+      `${import.meta.env.BASE_URL}img/services/1e.jpg`,
+      `${import.meta.env.BASE_URL}img/services/2e.jpg`,
+      `${import.meta.env.BASE_URL}img/services/3e.jpg`,
     ],
-    teaser: 'Letisztult, meleg tónusú nappali természetes anyagokkal.',
-    long: 'Teljes nappali átalakítás: új bútorozás, világítás és textíliák. A cél egy időtlen, meleg és barátságos tér volt, amely jól illeszkedik a budapesti polgári lakás karakteréhez.'
+    teaser: 'Nature and luxury intertwined in a serene wellness retreat.',
+    long: 'This bathroom blends organic textures with refined design, offering a luxurious and timeless atmosphere.'
   },
   {
-    title: 'Budapest – Nappali',
-    cover: `${import.meta.env.BASE_URL}img/services/1bor.jpg`,
+    title: 'Green Office',
+    cover: `${import.meta.env.BASE_URL}img/services/7bor.jpg`,
     images: [
-      `${import.meta.env.BASE_URL}img/1.jpg`,
-      `${import.meta.env.BASE_URL}img/2.jpg`,
-      `${import.meta.env.BASE_URL}img/3.jpg`,
-      `${import.meta.env.BASE_URL}img/4.jpg`,
+      `${import.meta.env.BASE_URL}img/services/1g.jpg`,
+      `${import.meta.env.BASE_URL}img/services/2g.jpg`,
+      `${import.meta.env.BASE_URL}img/services/3g.jpg`,
+      `${import.meta.env.BASE_URL}img/services/4g.jpg`,
+      `${import.meta.env.BASE_URL}img/services/5g.jpg`,
     ],
-    teaser: 'Letisztult, meleg tónusú nappali természetes anyagokkal.',
-    long: 'Teljes nappali átalakítás: új bútorozás, világítás és textíliák. A cél egy időtlen, meleg és barátságos tér volt, amely jól illeszkedik a budapesti polgári lakás karakteréhez.'
+    teaser: 'A workspace designed to inspire creativity, focus, and collaboration.',
+    long: 'A workspace designed to inspire creativity and productivity. The integration of natural light, plants, and premium finishes brings balance and harmony into the modern office setting.'
   },
-    {
-    title: 'Budapest – Nappali',
-    cover: `${import.meta.env.BASE_URL}img/services/1bor.jpg`,
-    images: [
-      `${import.meta.env.BASE_URL}img/1.jpg`,
-      `${import.meta.env.BASE_URL}img/2.jpg`,
-      `${import.meta.env.BASE_URL}img/3.jpg`,
-      `${import.meta.env.BASE_URL}img/4.jpg`,
-    ],
-    teaser: 'Letisztult, meleg tónusú nappali természetes anyagokkal.',
-    long: 'Teljes nappali átalakítás: új bútorozás, világítás és textíliák. A cél egy időtlen, meleg és barátságos tér volt, amely jól illeszkedik a budapesti polgári lakás karakteréhez.'
-  },
+
 ];
 ---
 

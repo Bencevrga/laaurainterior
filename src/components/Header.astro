@@ -1,11 +1,11 @@
 <header class="top-bar">
   <div class="top-bar-inner">
     <!-- Bal: logó -->
-     <a href={import.meta.env.BASE_URL}>
-      <img src={import.meta.env.BASE_URL + 'img/logo.jpg'} alt="La Aura Interiors Logo" class="header-logo"/>
+    <a href={import.meta.env.BASE_URL}>
+      <img src={import.meta.env.BASE_URL + 'img/logo.jpg'} alt="La Aura Interiors Logo" class="header-logo" />
     </a>
 
-    <!-- Közép: főmenü -->
+    <!-- Közép: főmenü (DESKTOP) -->
     <nav class="main-nav" aria-label="Main">
       <a href={import.meta.env.BASE_URL}>Home</a>
       <a href={import.meta.env.BASE_URL + '#about'}>About</a>
@@ -15,13 +15,18 @@
       <a href={import.meta.env.BASE_URL + '#contact'}>Contact</a>
     </nav>
 
-    <!-- Jobb: social ikonok -->
+    <!-- Jobb: social (DESKTOP) -->
     <div class="social-nav">
-      <a href="https://www.instagram.com/laaurainteriors?utm_source=ig_web_button_share_sheet&igsh=Y3l2MjI3ZXY5NHRm" target="_blank"><img src={import.meta.env.BASE_URL + 'img/insta.png'} alt="Instagram"></a>
+      <a href="https://www.instagram.com/laaurainteriors?..." target="_blank"><img src={import.meta.env.BASE_URL + 'img/insta.png'} alt="Instagram"></a>
       <a href="https://www.facebook.com/people/La-Aura-Interiors/61577900795092/" target="_blank"><img src={import.meta.env.BASE_URL + 'img/facebook.png'} alt="Facebook"></a>
-      <a href="https://www.tiktok.com/@laaurainterior?_r=1&_d=secCgYIASAHKAESPgo8lVmU4g3fLcjEa8KrdKhAqATFjBkEJ7ro99ZEJ%2B91Qdl65T8q9DTsGHUSK1mfEy4XRcSULz2a6NOww2DhGgA%3D&_svg=2&checksum=b52cfde20cb7c5d86412e18116341436a7b60eb81d3c1a47e264b9a2bb17532d&item_author_type=1&sec_uid=MS4wLjABAAAAwAOUCiQwLV4wZrSGp__EQEWXrnH6EC3s6tj0u8qlYSnwygOuOyNyA22TTVy0rU3r&sec_user_id=MS4wLjABAAAAwAOUCiQwLV4wZrSGp__EQEWXrnH6EC3s6tj0u8qlYSnwygOuOyNyA22TTVy0rU3r&share_app_id=1233&share_author_id=7314317247014568993&share_link_id=645A7EA2-35C5-4E74-9982-030B6B71D081&share_scene=1&sharer_language=en&social_share_type=4&source=h5_m&timestamp=1758653159&tt_from=copy&u_code=ebhd62akbdb90a&ug_btm=b8727%2Cb0&user_id=7314317247014568993&utm_campaign=client_share&utm_medium=ios&utm_source=copy" target="_blank"><img src={import.meta.env.BASE_URL + 'img/tiktok.png'} alt="Tiktok"></a>
+      <a href="https://www.tiktok.com/@laaurainterior?..." target="_blank"><img src={import.meta.env.BASE_URL + 'img/tiktok.png'} alt="Tiktok"></a>
       <a href="https://pin.it/3j4Q2pB2T" target="_blank"><img src={import.meta.env.BASE_URL + 'img/pinterest.png'} alt="Pinterest"></a>
-      <a href="https://www.linkedin.com/in/lara-bencov%C3%A1-a83235375?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank"><img src={import.meta.env.BASE_URL + 'img/linkedin.png'} alt="LinkedIn"></a>
+      <a href="https://www.linkedin.com/in/lara-bencov%C3%A1-a83235375" target="_blank"><img src={import.meta.env.BASE_URL + 'img/linkedin.png'} alt="LinkedIn"></a>
     </div>
+
+    <!-- MOBIL: hamburger -->
+    <span id="menuIcon" class="menu-icon" aria-label="Open menu" aria-controls="sideNav" aria-expanded="false">☰</span>
+
+
   </div>
 </header>

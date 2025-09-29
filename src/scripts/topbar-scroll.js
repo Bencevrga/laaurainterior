@@ -12,16 +12,28 @@ function smoothToId(id) {
 export default function initTopbarScroll() {
   if (typeof window === 'undefined' || typeof document === 'undefined') return;
 
-  // Fejléc "scrolled" állapota
-  const topBar = document.querySelector('.top-bar');
-  if (topBar) {
-    const onScroll = () => {
-      if (window.scrollY > 10) topBar.classList.add('scrolled');
-      else topBar.classList.remove('scrolled');
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
+  // Fejléc "scrolled" állapota + hamburger shrink támogatás
+const topBar = document.querySelector('.top-bar');
+if (topBar) {
+  const onScroll = () => {
+    const shrink = window.scrollY > 10;
+
+    // fejléc osztályozása
+    if (shrink) topBar.classList.add('scrolled');
+    else topBar.classList.remove('scrolled');
+
+    // body attribútum a hamburgerhez
+    if (shrink) {
+      document.body.setAttribute('data-shrink', '1');
+    } else {
+      document.body.removeAttribute('data-shrink');
+    }
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll(); // azonnali futtatás, ha nem a tetején nyílik meg az oldal
+}
+  
 
   // 🔹 Hash-es linkek: csak akkor fogjuk meg, ha a cél ID itt is létezik
   document.addEventListener('click', (e) => {

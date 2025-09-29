@@ -1,26 +1,24 @@
-<nav class="side-nav" id="sideNav">
+<nav class="side-nav" id="side-nav" aria-hidden="true">
   <a href="#" class="close-btn" aria-label="Close menu">×</a>
+  <!-- (opcionális) X gomb – ha nem kéred, CSS-ben már el van rejtve -->
+  <button class="close-btn" data-close="1" aria-label="Close menu" type="button">×</button>
+
   <a href={import.meta.env.BASE_URL}>Home</a>
-  <a href={import.meta.env.BASE_URL + 'about/'} class="side-link">About</a>
-  <a href={import.meta.env.BASE_URL + 'aboutme/'} class="side-link">About Me</a>
-  <a href={import.meta.env.BASE_URL + 'services/'} class="side-link">Services</a>
-  <a href={import.meta.env.BASE_URL + 'portfolio/'} class="side-link">Portfolio</a>
-  <a href={import.meta.env.BASE_URL + 'contact/'} class="side-link">Contact Us</a>
+  <a href={import.meta.env.BASE_URL + '#about'}>About</a>
+  <a href={import.meta.env.BASE_URL + '#services'}>Services</a>
+  <a href={import.meta.env.BASE_URL + '#feedbacks'}>Feedback</a>
+  <a href={import.meta.env.BASE_URL + '#portfolio'}>Projects</a>
+  <a href={import.meta.env.BASE_URL + '#contact'}>Contact</a>
 
   <div class="side-nav-contact">
-    <hr class="side-nav-divider" />   
-    <p><strong>📞Phone:<br></strong><a href="tel:+421917266710" class="phone-link">+421 917 266 710</a></p>
-    <p><strong>✉️Email:<br></strong><a href="mailto:laaurainterior@gmail.com" class="clean-email">laaurainterior@gmail.com</a></p>
+    <hr class="side-nav-divider" />
+    <p><strong>✉️ Email:</strong><br /><a href="mailto:laaurainterior@gmail.com" class="clean-email">laaurainterior@gmail.com</a></p>
     <div class="side-nav-social">
-      <a href="https://www.instagram.com/laaurainteriors" target="_blank">
-        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" />
-      </a>
-      <a href="https://www.tiktok.com/@laaurainterior" target="_blank">
-        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok" />
-      </a>
-      <a href="https://www.facebook.com/share/185pyf9XVz" target="_blank">
-        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" />
-      </a>
+      <a href="https://www.instagram.com/laaurainteriors?..." target="_blank"><img src={import.meta.env.BASE_URL + 'img/insta.png'} alt="Instagram"></a>
+      <a href="https://www.facebook.com/people/La-Aura-Interiors/61577900795092/" target="_blank"><img src={import.meta.env.BASE_URL + 'img/facebook.png'} alt="Facebook"></a>
+      <a href="https://www.tiktok.com/@laaurainterior?..." target="_blank"><img src={import.meta.env.BASE_URL + 'img/tiktok.png'} alt="Tiktok"></a>
+      <a href="https://pin.it/3j4Q2pB2T" target="_blank"><img src={import.meta.env.BASE_URL + 'img/pinterest.png'} alt="Pinterest"></a>
+      <a href="https://www.linkedin.com/in/lara-bencov%C3%A1-a83235375" target="_blank"><img src={import.meta.env.BASE_URL + 'img/linkedin.png'} alt="LinkedIn"></a>
     </div>
   </div>
 </nav>
