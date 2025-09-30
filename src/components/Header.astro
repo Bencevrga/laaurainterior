@@ -9,7 +9,21 @@
     <nav class="main-nav" aria-label="Main">
       <a href={import.meta.env.BASE_URL}>Home</a>
       <a href={import.meta.env.BASE_URL + '#about'}>About</a>
-      <a href={import.meta.env.BASE_URL + '#services'}>Services</a>
+      <!-- ▼ Services (hover dropdown) -->
+      <div class="nav-item has-dropdown">
+        <a href={import.meta.env.BASE_URL + '#services'} class="services-link">
+          Services
+          <span class="caret" aria-hidden="true"></span>
+        </a>
+        <div class="dropdown" role="menu" aria-label="Services submenu">
+          <a href={import.meta.env.BASE_URL + 'Consultation/'} class="dropdown-link">Consultation</a>       
+          <a href={import.meta.env.BASE_URL + 'Interiordesign/'} class="dropdown-link">Interior Design</a>
+          <a href={import.meta.env.BASE_URL + 'Visualization/'} class="dropdown-link">3D Visualization</a>
+          <a href={import.meta.env.BASE_URL + 'Homestaging/'} class="dropdown-link">Home Staging</a>
+        </div>
+      </div>
+      <!-- ▲ Services (hover dropdown) -->
+
       <a href={import.meta.env.BASE_URL + '#feedbacks'}>Feedback</a>
       <a href={import.meta.env.BASE_URL + '#portfolio'}>Projects</a>
       <a href={import.meta.env.BASE_URL + '#contact'}>Contact</a>
@@ -25,8 +39,6 @@
     </div>
 
     <!-- MOBIL: hamburger -->
-    <span id="menuIcon" class="menu-icon" aria-label="Open menu" aria-controls="sideNav" aria-expanded="false">☰</span>
-
-
+    <span class="menu-icon" data-menu-toggle aria-controls="sideNav" aria-expanded="false">☰</span>
   </div>
 </header>

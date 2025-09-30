@@ -5,110 +5,146 @@ if (!window.__la_nav_boot) {
   const qs  = (s, r = document) => r.querySelector(s);
   const qsa = (s, r = document) => Array.from(r.querySelectorAll(s));
 
-  function mountNav() {
+  // ===== Side-nav Services dropdown toggle =====
+(function attachSideNavDropdown(){
   const sideNav = document.querySelector('.side-nav');
-  const topBar  = document.querySelector('.top-bar');
-  const toggles = [
-    document.querySelector('#menuIcon'),
-    document.querySelector('.menu-icon'),
-    ...Array.from(document.querySelectorAll('[data-menu-toggle]'))
-  ].filter(Boolean);
+  if (!sideNav) return;
 
-  if (!sideNav || !topBar || toggles.length === 0) return;
+  // Kattintás a "Services" gombra -> nyit/zár
+  sideNav.addEventListener('click', (e) => {
+    const btn = e.target.closest('.sn-toggle');
+    if (!btn) return;
 
-  let overlay = null;
+    e.preventDefault();
+    const item = btn.closest('.sn-item');
+    const submenu = item?.querySelector('.sn-submenu');
+    if (!item || !submenu) return;
 
-  const ensureOverlay = () => {
-    if (overlay && document.body.contains(overlay)) return overlay;
-    overlay = document.createElement('div');
-    overlay.className = 'side-overlay';
-    overlay.addEventListener('click', close, { passive: true });
-    document.body.appendChild(overlay);
-    return overlay;
-  };
-
-  const removeOverlay = () => {
-    if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
-    overlay = null;
-  };
-
-  const syncPaddingTop = () => {
-    const h = Math.round(topBar.getBoundingClientRect().height || 0);
-    sideNav.style.paddingTop = `${h}px`;
-  };
-
-  const open = () => {
-    // topbar magassághoz igazítjuk a side-nav belső tetejét
-    syncPaddingTop();
-
-    document.documentElement.classList.add('nav-open');
-    sideNav.classList.add('is-open');
-    sideNav.setAttribute('aria-hidden', 'false');
-
-    ensureOverlay();
-    requestAnimationFrame(() => {
-      overlay && overlay.classList.add('visible');
+    const willOpen = !item.classList.contains('open');
+    // zárjuk a többi lenyílót (ha csak egy lehet nyitva)
+    sideNav.querySelectorAll('.sn-item.open').forEach(it => {
+      if (it !== item) {
+        it.classList.remove('open');
+        const sm = it.querySelector('.sn-submenu');
+        if (sm) sm.hidden = true;
+        const t = it.querySelector('.sn-toggle');
+        if (t) t.setAttribute('aria-expanded','false');
+      }
     });
 
-    // görgetés tiltása a háttéren
-    document.body.style.overflow = 'hidden';
+    item.classList.toggle('open', willOpen);
+    submenu.hidden = !willOpen;
+    btn.setAttribute('aria-expanded', String(willOpen));
+  });
 
-    toggles.forEach(t => t.setAttribute('aria-expanded', 'true'));
-  };
+  // Billentyűzet támogatás (Enter/Space)
+  sideNav.addEventListener('keydown', (e) => {
+    const btn = e.target.closest('.sn-toggle');
+    if (!btn) return;
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      btn.click();
+    }
+  });
+})();
 
-  const close = () => {
-    document.documentElement.classList.remove('nav-open');
-    sideNav.classList.remove('is-open');
+
+  function mountNav() {
+    const sideNav = qs('.side-nav');
+    const topBar  = qs('.top-bar');
+    // FONTOS: ha lehet, add hozzá a hamburger ikonhoz is: data-menu-toggle
+    const toggles = [
+      qs('#menuIcon'),
+      qs('.menu-icon'),
+      ...qsa('[data-menu-toggle]')
+    ].filter(Boolean);
+
+    if (!sideNav || toggles.length === 0) return;
+
+    // Backdrop létrehozása, ha nincs
+    let backdrop = qs('.side-nav-backdrop');
+    const ensureBackdrop = () => {
+      if (backdrop && document.body.contains(backdrop)) return backdrop;
+      const el = document.createElement('div');
+      el.className = 'side-nav-backdrop';
+      document.body.appendChild(el);
+      backdrop = el;
+      return el;
+    };
+
+    // Igazítás a top-bar magasságához (egybemosódás)
+    function syncPanelTop() {
+      if (!topBar) return;
+      const h = topBar.getBoundingClientRect().height || 0;
+      sideNav.style.paddingTop = `${h}px`;
+    }
+    syncPanelTop();
+
+    const isOpen = () => sideNav.classList.contains('is-open');
+
+    const open = () => {
+      ensureBackdrop();
+      sideNav.classList.add('is-open');
+      sideNav.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      toggles.forEach(t => t.setAttribute('aria-expanded', 'true'));
+      syncPanelTop();
+      backdrop.classList.add('is-visible');
+    };
+
+    const close = () => {
+      sideNav.classList.remove('is-open');
+      sideNav.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      toggles.forEach(t => t.setAttribute('aria-expanded', 'false'));
+      backdrop?.classList.remove('is-visible');
+    };
+
+    const toggle = (e) => {
+      e?.preventDefault?.();
+      isOpen() ? close() : open();
+    };
+
+    // Események – minden mountkor ÚJRA kötjük, de duplikáció elkerüléséhez jelölünk
+    toggles.forEach(btn => {
+      if (btn.dataset.boundNav === '1') return;
+      btn.addEventListener('click', toggle);
+      btn.dataset.boundNav = '1';
+    });
+
+    // Backdrop kattintás → zárás (delegálva, hogy új elemnél is működjön)
+    document.addEventListener('click', (e) => {
+      if (e.target && e.target.classList && e.target.classList.contains('side-nav-backdrop')) {
+        close();
+      }
+    });
+
+    // Linkre kattintás a panelben → zárás
+    sideNav.addEventListener('click', (e) => {
+      if (e.target.closest('a')) close();
+    });
+
+    // ESC → zárás
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) close();
+    });
+
+    // Kezdő állapot
     sideNav.setAttribute('aria-hidden', 'true');
+  }
 
-    overlay && overlay.classList.remove('visible');
-    // animáció után eltávolítjuk
-    setTimeout(removeOverlay, 220);
-
-    document.body.style.overflow = '';
-    sideNav.style.paddingTop = '';
-
-    toggles.forEach(t => t.setAttribute('aria-expanded', 'false'));
-  };
-
-  const toggle = (e) => {
-    e?.preventDefault?.();
-    if (sideNav.classList.contains('is-open')) close();
-    else open();
-  };
-
-  // események
-  toggles.forEach(btn => btn.addEventListener('click', toggle));
-  sideNav.querySelector('.close-btn')?.addEventListener('click', (e) => {
-    e.preventDefault(); close();
-  });
-  sideNav.addEventListener('click', (e) => {
-    if (e.target.closest('a')) close();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && sideNav.classList.contains('is-open')) close();
-  });
-
-  // ha a top-bar összemegy/nő scrollra: nyitva tartás közben is igazítsuk a padding-topot
-  window.addEventListener('scroll', () => {
-    if (sideNav.classList.contains('is-open')) syncPaddingTop();
-  }, { passive: true });
-  window.addEventListener('resize', () => {
-    if (sideNav.classList.contains('is-open')) syncPaddingTop();
-  });
-
-  console.log('[nav] mounted');
-}
-
-
-  const boot = () => {
+  function boot() {
     mountNav();
-    document.addEventListener('astro:page-load', () => mountNav());
-  };
+  }
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot, { once: true });
   } else {
     boot();
   }
+
+  // 🔁 Astro client-side navigáció után ÚJRA mountolunk (különben leesnek a handlerek)
+  document.addEventListener('astro:page-load', () => {
+    mountNav();
+  });
 }

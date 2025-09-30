@@ -79,7 +79,7 @@ body, p, li, a {
   background: #E6DED6;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   z-index: 3000;
-  transition: background .25s ease, box-shadow .25s ease, height .25s ease;
+  transition: height .28s ease, background-color .28s ease, box-shadow .28s ease;
 }
 
 /* Side-nav nyitva: topbar árnyék off és áttetszőbb, hogy “összeolvadjanak” */
@@ -117,11 +117,15 @@ html.nav-open .top-bar {
 	font-size: 34px;
 	width: 44px; height: 44px;
 	cursor: pointer;
-	z-index: var(--z-menu-icon);
+	z-index: 5000;
 	visibility: visible;
 	pointer-events: auto;
 	transition: top .25s ease, font-size .25s ease, transform .25s ease;
 }
+@media (min-width: 1024px) {
+  .menu-icon { display: none; }
+}
+
 /* Görgetés után zsugorodjon a hamburger is */
 body[data-shrink="1"] .menu-icon {
   top: 25px;
@@ -139,14 +143,33 @@ body[data-shrink="1"] .menu-icon {
   background-color: rgba(230, 222, 214, 0.92);
   backdrop-filter: blur(10px);
   box-shadow: -2px 0 12px rgba(0,0,0,0.08);
-  z-index: 3600;                  /* top-bar fölött */
+  z-index: 3700;
   overflow-y: auto;
-  padding-bottom: 24px;           /* kényelmi tér */
-  /* padding-top-ot a JS állítja a topbar magassága alapján */
+  /* a padding-top-ot a JS állítja, hogy egybeolvadjon a top-barral */
 }
-.side-nav.is-open {
-  transform: translateX(0);
+.side-nav.is-open { transform: translateX(0); }
+
+.side-nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.25);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease;
+  z-index: 3600;
 }
+.side-nav-backdrop.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobilon rejtsük a felső menüt és a social ikonokat */
+@media (max-width: 1023.98px) {
+  .main-nav,
+  .social-nav { display: none !important; }
+}
+
 .side-nav.active {
 	width: 250px;
 }
@@ -194,14 +217,26 @@ body[data-shrink="1"] .menu-icon {
 }
 .side-nav-social {
 	display: flex;
-	justify-content: flex-start;
+	justify-content: center;
 	margin-top: .5rem;
 }
+.side-nav-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;            /* NINCS extra belső tér */
+  border: 0 !important;             /* NINCS alsó vonal */
+  line-height: 0;                   /* ne legyen extra vertikális tér */
+  margin-right: 6px;                /* fallback, ha a gap-et valami kiüti */
+}
 .side-nav-social a img {
-	width: 18px;
-	height: 18px;
+	width: 32px;
+	height: 32px;
 	filter: grayscale(100%);
 	transition: .3s;
+}
+.side-nav-social a:last-child {
+  margin-right: 0; /* az utolsón ne legyen */
 }
 .side-nav-social a img:hover {
 	filter: grayscale(0%);
@@ -228,6 +263,7 @@ body[data-shrink="1"] .menu-icon {
 .clean-email:hover, .phone-link:hover {
 	text-decoration: underline;
 }
+
 /* ===================================================================Hero=================================================================== */
 .hero {
 	height: 100vh;
@@ -1488,6 +1524,7 @@ hatását CSAK a portfólión */
 	letter-spacing: .5px;
 	transition: all .3s ease;
 	display: inline-block;
+	text-align: center;
 }
 .more-button:hover {
 	background-color: #333;
@@ -1820,3 +1857,201 @@ display: none !important;
   #menuBtn { display: none !important; }
 }
 
+/* ===== Mobile layout a service szekciókhoz (kártyás) ===== */
+@media (max-width: 768px) {
+  .text-image-container {
+    display: block;          /* ne flex, ne egymás mellett */
+    padding: 0 16px;         /* kis oldal margó */
+  }
+
+  /* KÉP felül, teljes szélesség */
+  .text-image-container .about-images {
+    margin: 0 0 14px 0;
+  }
+  .text-image-container .about-images img {
+    width: 100%;
+    height: 230px;           /* állítsd 200–280px között ízlés szerint */
+    object-fit: cover;       /* prémium vágás, nem „darál” */
+    display: block;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.08);
+  }
+
+  /* SZÖVEG kártyán, finom háttérrel */
+  .text-image-container .service-block {
+    background: rgba(245,241,237,0.92); /* a brand bézse finoman */
+    backdrop-filter: blur(1px);
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.05);
+  }
+}
+
+/* Desktop marad a régi (kép a szöveg mellett) – csak biztosíték: */
+@media (min-width: 769px) {
+  .text-image-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+}
+
+/* ===== Desktop Services dropdown – flush alatt, rés NINCS ===== */
+@media (min-width: 1024px) {
+
+  .main-nav .nav-item { position: relative; }
+
+  .main-nav .services-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+  }
+
+  .main-nav .services-link .caret {
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid currentColor;
+    transition: transform .18s ease;
+    margin-top: 2px;
+  }
+
+  /* ▼ KÖZVETLENÜL a gomb alatt, nincs függőleges hézag */
+  .main-nav .dropdown {
+    position: absolute;
+    top: 100%;                 /* pont a link alá */
+    left: 0;                   /* a Services link bal szélétől induljon */
+    transform: translateY(0) scale(0.98);
+    transform-origin: top left;
+    min-width: 220px;
+    padding: 10px;
+    margin-top: 0;             /* NINCS extra rés */
+    background: rgba(230, 222, 214, 0.98);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(0,0,0,.06);
+    border-radius: 12px;
+    box-shadow: 0 10px 28px rgba(0,0,0,.12);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .18s ease, transform .18s ease, visibility 0s linear .18s;
+    z-index: 4500;
+  }
+
+  /* ha a link teljes szélessége fölé akarod igazítani: 
+     tedd a .nav-item-re display:inline-block; és hagyd left:0; */
+
+  .main-nav .dropdown .dropdown-link {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    color: var(--text);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color .15s ease, transform .15s ease;
+  }
+  .main-nav .dropdown .dropdown-link:hover {
+    background: rgba(0,0,0,.05);
+    transform: translateX(2px);
+  }
+
+  /* Megnyitás HOVER-re (rés nincs, így nem flickerel) */
+  .main-nav .nav-item.has-dropdown:hover .dropdown,
+  .main-nav .nav-item.has-dropdown:focus-within .dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+  }
+
+  /* caret forduljon le */
+  .main-nav .nav-item.has-dropdown:hover .services-link .caret,
+  .main-nav .nav-item.has-dropdown:focus-within .services-link .caret {
+    transform: rotate(180deg);
+  }
+}
+
+/* ===== Side-nav: Services lenyíló ===== */
+.side-nav .sn-item { margin: 4px 0; }
+
+/* A “Services” gomb kinézete legyen egységes a linkekkel */
+.side-nav .sn-toggle {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 10px 30px;
+  font-size: 1.2rem;
+  color: var(--text);
+  font-family: 'Work Sans', sans-serif;
+  letter-spacing: .5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color .2s ease, color .2s ease;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.side-nav .sn-toggle:hover { background-color: var(--bg); }
+
+/* Kis nyíl a szöveg jobb szélén (forgás nyitáskor) */
+.side-nav .sn-toggle .sn-caret {
+  margin-left: auto;
+  width: 0; height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid currentColor;
+  transition: transform .18s ease;
+}
+
+/* Almenü: animált lenyílás (max-height transition) */
+.side-nav .sn-submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 6px 0;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .25s ease;
+  background: rgba(0,0,0,0.02);
+}
+
+/* Almenü linkek — finom beljebb húzás */
+.side-nav .sn-submenu .side-link {
+  padding: 10px 30px 10px 44px; /* kicsit beljebb a főelemhez képest */
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+/* Nyitott állapot: mutassuk, animálva */
+.side-nav .sn-item.open .sn-submenu {
+  max-height: 500px;   /* elég nagy, hogy kiférjen a 4 elem */
+}
+.side-nav .sn-item.open .sn-submenu[hidden] { display: block; } /* biztos, ami biztos */
+.side-nav .sn-item.open .sn-toggle .sn-caret { transform: rotate(180deg); }
+
+/* ===== Side-nav: Services lenyíló (finomított) ===== */
+
+/* Services főgomb – ne legyen félkövér */
+.side-nav .sn-toggle {
+  font-weight: 300;  /* egységes a többi linkkel */
+  letter-spacing: .5px;
+}
+
+/* Almenü kissé beljebb kezdődjön */
+.side-nav .sn-submenu {
+  list-style: none;
+  margin: 0 0 0 12px;   /* bal oldali beljebb húzás */
+  padding: 0 0 6px 0;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .25s ease, margin .25s ease;
+  background: rgba(0,0,0,0.015); /* nagyon halvány háttér, elkülönítéshez */
+  border-left: 2px solid rgba(0,0,0,.05); /* vékony bal csík */
+  border-radius: 0 0 6px 0; /* finom lekerekítés */
+}
+
+/* Almenü linkek még beljebb, a csík után */
+.side-nav .sn-submenu .side-link {
+  padding: 10px 30px 10px 50px; /* plusz indent */
+  font-weight: 300; /* egységes */
+}

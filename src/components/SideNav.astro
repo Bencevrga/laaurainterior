@@ -1,11 +1,24 @@
-<nav class="side-nav" id="side-nav" aria-hidden="true">
+<nav class="side-nav" id="sideNav" aria-hidden="true">
   <a href="#" class="close-btn" aria-label="Close menu">×</a>
   <!-- (opcionális) X gomb – ha nem kéred, CSS-ben már el van rejtve -->
   <button class="close-btn" data-close="1" aria-label="Close menu" type="button">×</button>
+  <span class="menu-icon" data-menu-toggle aria-controls="sideNav" aria-expanded="false">☰</span>
+
 
   <a href={import.meta.env.BASE_URL}>Home</a>
   <a href={import.meta.env.BASE_URL + '#about'}>About</a>
-  <a href={import.meta.env.BASE_URL + '#services'}>Services</a>
+  <div class="sn-item">
+    <button class="sn-toggle" type="button" aria-expanded="false">
+      Services
+      <span class="sn-caret" aria-hidden="true"></span>
+    </button>
+    <ul class="sn-submenu" hidden>
+      <li><a href={import.meta.env.BASE_URL + 'Consultation/'} class="dropdown-link">Consultation</a></li>       
+      <li><a href={import.meta.env.BASE_URL + 'Interiordesign/'} class="dropdown-link">Interior Design</a></li>
+      <li><a href={import.meta.env.BASE_URL + 'Visualization/'} class="dropdown-link">3D Visualization</a></li>
+      <li><a href={import.meta.env.BASE_URL + 'Homestaging/'} class="dropdown-link">Home Staging</a></li>
+    </ul>
+  </div>
   <a href={import.meta.env.BASE_URL + '#feedbacks'}>Feedback</a>
   <a href={import.meta.env.BASE_URL + '#portfolio'}>Projects</a>
   <a href={import.meta.env.BASE_URL + '#contact'}>Contact</a>
